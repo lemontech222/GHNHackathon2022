@@ -1,5 +1,21 @@
-# Completed API Endpoints
+# Set up the django project
+a. Install python
+b. Create virtual environment
+    - Open command prompt or terminal in the directory you want
+    - Run 'python -m venv hackathon_env'
+    - This will create a virtual environment called hackathon_env in that directory
+    - Activate the virtual environment:
+        On windows, run 'hackathon_env\Scripts\activate.bat' to activate
+        On Mac or Linux, run 'hackathon_env\bin\activate'
+    - Install all dependencies from the requirements.txt
+        'pip install -r requirements.txt'
+    - Once all dependencies are installed, start the django dev server
+        - Run 'cd core' to change directory to the django project folder 'core'
+        - Run 'python manage.py runserver'
+        - Server will be ran on localhost:8000
+        - Use the completed endpoints and test them out
 
+# Completed API Endpoints
 # Data validation is being handled on the server for all endpoints
 
 1. /api/users/register/
@@ -39,5 +55,5 @@
         "refresh":`${refresh_token}`
     }
     Returns new access and refresh tokens in JSON response
-    
+
 
