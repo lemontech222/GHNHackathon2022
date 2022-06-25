@@ -26,8 +26,6 @@ export function LoginPage(props) {
     initialActive ? initialActive : 'signin'
   );
 
-  console.log(active);
-
   const switchActive = (active) => {
     setTimeout(() => setActive(active), 400);
   };

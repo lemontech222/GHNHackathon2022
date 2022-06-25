@@ -28,7 +28,7 @@ const InputContainer = styled.input`
     font-size: 24px;
     line-height: 29px;
 
-    color: #d9d9d9;
+    color: #322f2f;
   }
 `;
 

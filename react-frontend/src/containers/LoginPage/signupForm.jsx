@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import { Button } from '../../components/Button';
 import { InputField } from '../../components/InputField';
@@ -26,16 +27,25 @@ const Entities = styled.div`
     border-radius: 60px;
 
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
 `;
 
 const Entity = styled.div`
-  width: 30%;
+  width: 33%;
   height: 56px;
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 60px;
+  color: ${({ color }) => (color ? color : '#322f2f')};
+  background: ${({ background }) => (background ? background : '#D9D9D9')};
+
+  &:hover {
+    background: #34abde;
+    color: #ffffff;
+    cursor: pointer;
+  }
 `;
 
 const EntityName = styled.h2`
@@ -44,24 +54,63 @@ const EntityName = styled.h2`
   font-size: 16px;
   line-height: 19px;
   text-align: center;
-
-  color: #322f2f;
 `;
 
 export function SignupForm() {
+  const [entity, setEntity] = useState('startup');
+
+  const EntityAction = (e) => {
+    setEntity(e.target.id);
+  };
+
   return (
     <SignupContainer>
       <Title left={58}>Sign up</Title>
       <Entities>
-        <Entity>
-          <EntityName>Hub</EntityName>
-        </Entity>
-        <Entity>
-          <EntityName>Person/ StartUp</EntityName>
-        </Entity>
-        <Entity>
-          <EntityName>Partner Org</EntityName>
-        </Entity>
+        {entity === 'hub' && (
+          <Entity background="#34abde" color="#ffffff">
+            <EntityName id="hub" onClick={EntityAction}>
+              Hub
+            </EntityName>
+          </Entity>
+        )}
+        {entity !== 'hub' && (
+          <Entity>
+            <EntityName id="hub" onClick={EntityAction}>
+              Hub
+            </EntityName>
+          </Entity>
+        )}
+
+        {entity === 'startup' && (
+          <Entity background="#34abde" color="#ffffff">
+            <EntityName id="startup" onClick={EntityAction}>
+              Person/ StartUp
+            </EntityName>
+          </Entity>
+        )}
+        {entity !== 'startup' && (
+          <Entity>
+            <EntityName id="startup" onClick={EntityAction}>
+              Person/ StartUp
+            </EntityName>
+          </Entity>
+        )}
+
+        {entity === 'partner' && (
+          <Entity background="#34abde" color="#ffffff">
+            <EntityName id="partner" onClick={EntityAction}>
+              Partner Org
+            </EntityName>
+          </Entity>
+        )}
+        {entity !== 'partner' && (
+          <Entity>
+            <EntityName id="partner" onClick={EntityAction}>
+              Partner Org
+            </EntityName>
+          </Entity>
+        )}
       </Entities>
       <InputField placeholder="First name" width={298} top={134} left={58} />
       <InputField placeholder="Last name" width={298} top={134} left={388} />
