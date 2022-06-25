@@ -17,7 +17,7 @@ class Profile(models.Model):
 
 # Hub
 class Hub(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
     hub_name = models.CharField(max_length=255)
     description = models.TextField(null=True, blank=True)
     contact = models.CharField(max_length=20, null=True, blank=True)
