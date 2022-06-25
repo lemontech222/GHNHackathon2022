@@ -1,6 +1,10 @@
+import { useState } from 'react';
+import { useParams } from 'react-router';
 import styled from 'styled-components';
 import { BrandLogo } from '../../components/BrandLogo';
-import { LoginForm, SubText } from './loginForm';
+import { AccountContext } from './context';
+import { LoginForm } from './loginForm';
+import { SignupForm } from './signupForm';
 
 const Logincontainer = styled.div`
   width: 100%;
@@ -16,16 +20,40 @@ const LogoContainer = styled.div`
   top: 45px;
 `;
 
-export function LoginPage() {
+export function LoginPage(props) {
+  const initialActive = useParams();
+  const [active, setActive] = useState(
+    initialActive ? initialActive : 'signin'
+  );
+
+  console.log(active);
+
+  const switchActive = (active) => {
+    setTimeout(() => setActive(active), 400);
+  };
+
+  const switchToSignup = () => {
+    switchActive('signup');
+  };
+
+  const switchToSignin = () => {
+    switchActive('signin');
+  };
+
+  const contextValue = {
+    switchToSignup,
+    switchToSignin,
+  };
+
   return (
-    <Logincontainer>
-      <LogoContainer>
-        <BrandLogo hideLogoTitle logoSize={160} />
-      </LogoContainer>
-      <LoginForm />
-      <SubText left={828} top={866} fontWeight="300" width={371}>
-        New to GHN Connect? Join now
-      </SubText>
-    </Logincontainer>
+    <AccountContext.Provider value={contextValue}>
+      <Logincontainer>
+        <LogoContainer>
+          <BrandLogo hideLogoTitle logoSize={160} />
+        </LogoContainer>
+        {active.action === 'signin' && <LoginForm />}
+        {active.action === 'signup' && <SignupForm />}
+      </Logincontainer>
+    </AccountContext.Provider>
   );
 }

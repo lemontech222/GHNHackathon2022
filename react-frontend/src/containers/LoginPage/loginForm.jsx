@@ -8,23 +8,23 @@ const LoginFormContainer = styled.div`
     width: 484px;
     height: 718px;
     left 758px;
-    top: 111px;
+    top: 161px;
 
     background: #ffffff;
     box-shadow: 0px 4px 5px 5px #CAC1C1;
     border-radius: 10px;
 `;
 
-const Title = styled.h1`
+export const Title = styled.h1`
   position: absolute;
-  height: 66px;
-  width: 171px;
-  left: 26px;
-  top: 49px;
+  height: ${({ height }) => (height ? height + 'px' : '66px')};
+  width: ${({ width }) => (width ? width + 'px' : '171px')};
+  left: ${({ left }) => (left ? left + 'px' : '26px')};
+  top: ${({ top }) => (top ? top + 'px' : '49px')};
 
   font-style: normal;
-  font-weight: 500;
-  font-size: 50px;
+  font-weight: ${({ fontWeight }) => (fontWeight ? fontWeight : '500')};
+  font-size: ${({ fontSize }) => (fontSize ? fontSize + 'px' : '50px')};
   line-height: 61px;
 
   color: #000000;
@@ -45,9 +45,9 @@ export const SubText = styled.p`
   color: ${({ color }) => (color ? color : '#000000')};
 `;
 
-const Line = styled.div`
+export const Line = styled.div`
   position: absolute;
-  width: 180px;
+  width: ${({ width }) => (width ? width + 'px' : '180px')};
   height: 0px;
   left: ${({ left }) => (left ? left + 'px' : '26px')};
   top: ${({ top }) => (top ? top + 'px' : '535px')};
@@ -55,13 +55,21 @@ const Line = styled.div`
   border: 1px solid rgba(0, 0, 0, 0.7);
 `;
 
-const Icon = styled.div`
+export const Icon = styled.div`
   position: absolute;
   width: 38px;
   height: 38px;
-  left: 70px;
+  left: ${({ left }) => (left ? left + 'px' : '70px')};
   top: 16px;
   background: url(${GoogleIcon});
+`;
+
+export const BoldLink = styled.a`
+  color: #34abde;
+  font-weight: 400;
+  font-size: 18px;
+  text-decoration: none;
+  margin: 0 3px;
 `;
 
 export function LoginForm() {
@@ -101,6 +109,20 @@ export function LoginForm() {
           Sign in with Google
         </SubText>
       </Button>
+      <SubText left={6} top={670} fontWeight="300" width={371}>
+        New to GHN Connect?{' '}
+      </SubText>
+      <BoldLink href="/access/signup">
+        <SubText
+          left={160}
+          top={670}
+          fontWeight="300"
+          width={371}
+          color="#34ABDE"
+        >
+          Join now
+        </SubText>
+      </BoldLink>
     </LoginFormContainer>
   );
 }

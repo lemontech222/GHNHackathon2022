@@ -4,7 +4,7 @@ const InputContainer = styled.input`
   box-sizing: border-box;
 
   position: absolute;
-  width: 432px;
+  width: ${({ width }) => (width ? width + 'px' : '432px')};
   height: 70px;
   left: ${({ left }) => (left ? left + 'px' : '26px')};
   top: ${({ top }) => (top ? top + 'px' : '163px')};
@@ -28,11 +28,19 @@ const InputContainer = styled.input`
     font-size: 24px;
     line-height: 29px;
 
-    color: #322f2f;
+    color: #d9d9d9;
   }
 `;
 
 export function InputField(props) {
-  const { placeholder, top, type } = props;
-  return <InputContainer placeholder={placeholder} top={top} type={type} />;
+  const { placeholder, top, type, width, left } = props;
+  return (
+    <InputContainer
+      placeholder={placeholder}
+      top={top}
+      left={left}
+      type={type}
+      width={width}
+    />
+  );
 }

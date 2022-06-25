@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const ButtonContainer = styled.button`
   position: absolute;
-  width: 432px;
+  width: ${({ width }) => (width ? width + 'px' : '432px')};
   height: 75px;
   left: ${({ left }) => (left ? left + 'px' : '26px')};
   top: ${({ top }) => (top ? top + 'px' : '422px')};
@@ -27,7 +27,8 @@ const ButtonContainer = styled.button`
 `;
 
 export function Button(props) {
-  const { size, color, click, top, bgcolor, border, left, fontWeight } = props;
+  const { size, color, click, top, bgcolor, border, left, fontWeight, width } =
+    props;
   return (
     <ButtonContainer
       size={size}
@@ -39,6 +40,7 @@ export function Button(props) {
       border={border}
       left={left}
       fontWeight={fontWeight}
+      width={width}
     >
       {props.children}
     </ButtonContainer>

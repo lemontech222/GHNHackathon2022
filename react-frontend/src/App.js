@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<LoginPage />} />
+        <Route path="/access/:action" element={<LoginPage />} />
       </Routes>
     </div>
   );
