@@ -31,3 +31,16 @@ class Hub(models.Model):
         return self.hub_name
 
 
+# Portfolio
+class Portfolio(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    project_title = models.CharField(max_length=255)
+    project_description = models.TextField(blank=True)
+    project_link = models.TextField(blank=True)
+    # project_image
+    start_date = models.DateTimeField(null=True, blank=True)
+    end_date = models.DateTimeField(null=True, blank=True)
+
+    def __str__(self):
+        return self.project_title
+
