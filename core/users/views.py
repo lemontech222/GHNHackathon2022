@@ -1,6 +1,8 @@
+from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework import generics
+from rest_framework import viewsets
 from accounts.models import User
 from .serializers import (
                         MyTokenObtainPairSerializer,
@@ -19,19 +21,24 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
-
-class UserList(generics.ListAPIView):
+# User views with model viewsets
+class UserModelViewset(viewsets.ModelViewSet):
     permission_classes = [IsAdminUser]
-    queryset = User.objects.all()
     serializer_class = UserSerializer
+    # queryset = User.objects.all()
+
+    # Detail views can now use username instead of id
+    def get_object(self, queryset=None, **kwargs):
+        user = self.kwargs.get('pk')
+        return get_object_or_404(User, username=user)
 
 
-class UserDetail(generics.RetrieveDestroyAPIView):
-    permission_classes = [IsAdminUser]
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+    # Customize queryset
+    def get_queryset(self):
+        return User.objects.all()
 
 
+# Create user view
 class CustomUserCreate(APIView):
     permission_classes = [AllowAny]
 
