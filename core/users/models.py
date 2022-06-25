@@ -33,7 +33,7 @@ class Hub(models.Model):
 
 # Portfolio
 class Portfolio(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     project_title = models.CharField(max_length=255)
     project_description = models.TextField(blank=True)
     project_link = models.TextField(blank=True)
@@ -44,3 +44,18 @@ class Portfolio(models.Model):
     def __str__(self):
         return self.project_title
 
+
+# Work experience
+class WorkExperience(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    company = models.CharField(max_length=255)
+    company_address = models.TextField(blank=True)
+    position = models.CharField(max_length=255)
+    description = models.TextField(blank=True)
+    start_date = models.DateField()
+    end_date = models.DateField(null=True,blank=True)
+    still_working_here = models.BooleanField(default=False)
+    
+
+    def __str__(self):
+        return self.position

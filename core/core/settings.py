@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'events',
     'messaging',
     'surveys',
+    'forum',
 ]
 
 AUTH_USER_MODEL = 'accounts.User'
