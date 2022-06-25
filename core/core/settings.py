@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'accounts',
     'users',
     'events',
+    'messaging',
 ]
 
 AUTH_USER_MODEL = 'accounts.User'
