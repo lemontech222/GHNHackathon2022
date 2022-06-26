@@ -1,21 +1,27 @@
 from django.db import models
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
+from django.utils.translation import gettext_lazy as _
 
 
 class CustomUserManager(BaseUserManager):
     def create_user(self,email,password,first_name,last_name,**extra_fields):
         if not email:
-            raise ValueError('You must provide an email address')
+            raise ValueError(_('You must provide an email address'))
         
         if not first_name:
-            raise ValueError('You must provide a first name')
+            raise ValueError(_('You must provide a first name'))
 
         if not last_name:
-            raise ValueError('You must provide a last name')
+            raise ValueError(_('You must provide a last name'))
 
         email = self.normalize_email(email)
-        user=self.model(email=email,first_name=first_name,last_name=last_name,**extra_fields)
+        user=self.model(
+                            email=email,
+                            first_name=first_name,
+                            last_name=last_name,
+                            **extra_fields
+                        )
         user.set_password(password)
         user.save()
         return user
@@ -36,6 +42,8 @@ class CustomUserManager(BaseUserManager):
 class User(AbstractUser):
     email=models.CharField(max_length=255,unique=True)
     username=models.CharField(max_length=150,unique=True)
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=150)
     objects = CustomUserManager()
     
     USERNAME_FIELD = 'email'
