@@ -39,7 +39,7 @@ export const SubText = styled.p`
 
   font-style: normal;
   font-weight: ${({ fontWeight }) => (fontWeight ? fontWeight : '400')};
-  font-size: 20px;
+  font-size: ${({ fontSize }) => (fontSize ? fontSize + 'px' : '20px')};
   line-height: 24px;
 
   color: ${({ color }) => (color ? color : '#000000')};
@@ -67,7 +67,7 @@ export const Icon = styled.div`
 export const BoldLink = styled.a`
   color: #34abde;
   font-weight: 400;
-  font-size: 18px;
+  font-size: ${({ fontSize }) => (fontSize ? fontSize + 'px' : '18px')};
   text-decoration: none;
   margin: 0 3px;
 `;
