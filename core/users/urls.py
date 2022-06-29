@@ -1,11 +1,18 @@
 from django.urls import path
-from .views import HubAdminUserCreate, UserModelViewset
+from .views import (
+                    HubAdminUserCreate, 
+                    StartupUserCreate, 
+                    IndividualUserCreate,
+                    UserModelViewset
+                    )
 from rest_framework.routers import DefaultRouter
 
 app_name = 'users'
 router = DefaultRouter()
 router.register('', UserModelViewset, basename='user')
 urlpatterns = [
-    path('register/', HubAdminUserCreate.as_view(), name='create_user')
+    path('register/', IndividualUserCreate.as_view(), name='create_user'),
+    path('register_hub/', HubAdminUserCreate.as_view(), name='create_hub_user'),
+    path('register_startup/', StartupUserCreate.as_view(), name='create_startup_user'),
 ] + router.urls
 

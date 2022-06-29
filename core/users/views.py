@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework import generics
 from rest_framework import viewsets
 from accounts.models import User
-from .models import Hub, Profile
+from .models import Hub, Profile, Startup
 from .serializers import (
                         MyTokenObtainPairSerializer,
                         UserSerializer, 
@@ -39,7 +39,7 @@ class UserModelViewset(viewsets.ModelViewSet):
         return User.objects.all()
 
 
-# Create user view
+# Create hub admin user view
 class HubAdminUserCreate(APIView):
     permission_classes = [AllowAny]
 
@@ -58,4 +58,41 @@ class HubAdminUserCreate(APIView):
                 profile.save()
                 return Response(status=status.HTTP_201_CREATED)
         return Response(reg_serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+
+# Create startup user view
+class StartupUserCreate(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        reg_serializer = RegisterUserSerializer(data=request.data)
+        if reg_serializer.is_valid():
+            newuser = reg_serializer.save()
+
+            if newuser:
+                # Create new Hub
+                startup = Startup.objects.create(user=newuser)
+                startup.save()
+
+                # Create user profile
+                profile = Profile.objects.create(user=newuser)
+                profile.save()
+                return Response(status=status.HTTP_201_CREATED)
+        return Response(reg_serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+
+# Create startup user view
+class IndividualUserCreate(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        reg_serializer = RegisterUserSerializer(data=request.data)
+        if reg_serializer.is_valid():
+            newuser = reg_serializer.save()
+
+            if newuser:
+                # Create user profile
+                profile = Profile.objects.create(user=newuser)
+                profile.save()
+                return Response(status=status.HTTP_201_CREATED)
+        return Response(reg_serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+
 
