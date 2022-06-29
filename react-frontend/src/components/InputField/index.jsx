@@ -33,7 +33,8 @@ const InputContainer = styled.input`
 `;
 
 export function InputField(props) {
-  const { placeholder, top, type, width, left } = props;
+  const { placeholder, top, type, width, left, onChange, onClick, required } =
+    props;
   return (
     <InputContainer
       placeholder={placeholder}
@@ -41,6 +42,9 @@ export function InputField(props) {
       left={left}
       type={type}
       width={width}
+      onChange={onChange}
+      onClick={onClick}
+      required={required}
     />
   );
 }

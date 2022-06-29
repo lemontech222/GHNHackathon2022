@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import { Button } from '../../components/Button';
 import { InputField } from '../../components/InputField';
 import { BoldLink, Icon, Line, SubText, Title } from './loginForm';
+import Axios from 'axios';
 
-const SignupContainer = styled.div`
+const SignupContainer = styled.form`
     position: absolute;
     width: 740px;
     height: 848px;
@@ -59,12 +60,58 @@ const EntityName = styled.h2`
 export function SignupForm() {
   const [entity, setEntity] = useState('startup');
 
+  const [firstName, setFirstName] = useState('');
+
+  const [lastName, setLastName] = useState('');
+
+  const [userName, setUserName] = useState('');
+
+  const [email, setEmail] = useState('');
+
+  const [password, setPassword] = useState();
+
+  const [confirm, setConfirmed] = useState();
+
   const EntityAction = (e) => {
     setEntity(e.target.id);
   };
 
+  const confirmPassword = (e) => {
+    e.target.value === password && setConfirmed(true);
+
+    e.target.value !== password && setConfirmed(false);
+  };
+
+  const register = async (e) => {
+    e.preventDefault();
+
+    confirm === true &&
+      Axios({
+        method: 'post',
+        url: 'http://localhost:8000/api/users/register/',
+        data: {
+          first_name: firstName,
+          last_name: lastName,
+          email: email,
+          username: userName,
+          password: password,
+        },
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+        },
+      }).then(
+        (response) => {
+          console.log(response);
+        },
+        (err) => {
+          console.log('Error: ', err);
+        }
+      );
+  };
+
   return (
-    <SignupContainer>
+    <SignupContainer onSubmit={register}>
       <Title left={58}>Sign up</Title>
       <Entities>
         {entity === 'hub' && (
@@ -112,35 +159,93 @@ export function SignupForm() {
           </Entity>
         )}
       </Entities>
-      <InputField placeholder="First name" width={298} top={134} left={58} />
-      <InputField placeholder="Last name" width={298} top={134} left={388} />
       <InputField
-        placeholder="Email or Username"
+        placeholder="First name"
+        type="text"
+        name="first_name"
+        width={298}
+        top={134}
+        left={58}
+        onChange={(e) => setFirstName(e.target.value)}
+        required={true}
+      />
+      <InputField
+        placeholder="Last name"
+        typ="text"
+        name="last_name"
+        width={298}
+        top={134}
+        left={388}
+        onChange={(e) => setLastName(e.target.value)}
+        required={true}
+      />
+      <InputField
+        placeholder="Username"
+        type="text"
+        name="username"
         width={628}
         top={223}
         left={58}
+        onChange={(e) => setUserName(e.target.value)}
+        required={true}
       />
       <InputField
-        type="password"
-        placeholder="Password"
+        placeholder="Email"
+        type="email"
+        name="email"
         width={628}
         top={312}
         left={58}
+        onChange={(e) => setEmail(e.target.value)}
+        required={true}
       />
       <InputField
         type="password"
-        placeholder="Confirm Password"
-        width={628}
+        name="password"
+        placeholder="Password"
+        width={298}
         top={401}
         left={58}
+        onChange={(e) => setPassword(e.target.value)}
+        required={true}
       />
-      <SubText left={83} top={492} fontWeight="300" width={570}>
+
+      <InputField
+        type="password"
+        placeholder="Confirm Password"
+        name="passwordConfirm"
+        width={298}
+        top={401}
+        left={388}
+        onChange={confirmPassword}
+        required={true}
+      />
+      {confirm === false && (
+        <SubText top={473} left={388} fontSize={12} width={298} color="red">
+          Passwords don't match
+        </SubText>
+      )}
+      {confirm === true && (
+        <SubText top={473} left={388} fontSize={12} width={298} color="green">
+          Passwords match
+        </SubText>
+      )}
+
+      <SubText left={83} top={500} fontWeight="300" width={570} fontSize={15}>
         By clicking Agree & Join, you agree to the GHN{' '}
-        <BoldLink href="#">User Agreement,</BoldLink>{' '}
-        <BoldLink href="#">Privacy Policy,</BoldLink> and{' '}
-        <BoldLink href="#">Cookie Policy</BoldLink> .
+        <BoldLink fontSize={15} href="#">
+          User Agreement,
+        </BoldLink>{' '}
+        <BoldLink fontSize={15} href="#">
+          Privacy Policy,
+        </BoldLink>{' '}
+        and{' '}
+        <BoldLink fontSize={15} href="#">
+          Cookie Policy
+        </BoldLink>
+        .
       </SubText>
-      <Button top={560} width={628} left={58}>
+      <Button top={560} width={628} left={58} type="submit">
         <SubText
           top={26}
           left={247}
