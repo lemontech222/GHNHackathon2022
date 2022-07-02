@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Button } from '../../components/Button';
 import { InputField } from '../../components/InputField';
@@ -58,7 +58,7 @@ const EntityName = styled.h2`
 `;
 
 export function SignupForm() {
-  const [entity, setEntity] = useState('startup');
+  const [entity, setEntity] = useState('individual');
 
   const [firstName, setFirstName] = useState('');
 
@@ -72,6 +72,8 @@ export function SignupForm() {
 
   const [confirm, setConfirmed] = useState();
 
+  const [url, setUrl] = useState('');
+
   const EntityAction = (e) => {
     setEntity(e.target.id);
   };
@@ -82,23 +84,25 @@ export function SignupForm() {
     e.target.value !== password && setConfirmed(false);
   };
 
+  const SetUrl = async () => {
+    entity === 'individual' && setUrl('api/users/register/');
+    entity === 'hub' && setUrl('api/users/register_hub/');
+    entity === 'startup' && setUrl('api/users/register_startup/');
+  };
+
   const register = async (e) => {
     e.preventDefault();
 
     confirm === true &&
       Axios({
         method: 'post',
-        url: 'http://localhost:8000/api/users/register/',
+        url: url,
         data: {
           first_name: firstName,
           last_name: lastName,
           email: email,
           username: userName,
           password: password,
-        },
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
         },
       }).then(
         (response) => {
@@ -110,19 +114,28 @@ export function SignupForm() {
       );
   };
 
+  useEffect(() => {
+    SetUrl();
+  });
+
   return (
     <SignupContainer onSubmit={register}>
       <Title left={58}>Sign up</Title>
       <Entities>
         {entity === 'hub' && (
-          <Entity background="#34abde" color="#ffffff">
+          <Entity
+            background="#34abde"
+            color="#ffffff"
+            id="hub"
+            onClick={EntityAction}
+          >
             <EntityName id="hub" onClick={EntityAction}>
               Hub
             </EntityName>
           </Entity>
         )}
         {entity !== 'hub' && (
-          <Entity>
+          <Entity id="hub" onClick={EntityAction}>
             <EntityName id="hub" onClick={EntityAction}>
               Hub
             </EntityName>
@@ -130,31 +143,41 @@ export function SignupForm() {
         )}
 
         {entity === 'startup' && (
-          <Entity background="#34abde" color="#ffffff">
+          <Entity
+            background="#34abde"
+            color="#ffffff"
+            id="startup"
+            onClick={EntityAction}
+          >
             <EntityName id="startup" onClick={EntityAction}>
-              Person/ StartUp
+              StartUp
             </EntityName>
           </Entity>
         )}
         {entity !== 'startup' && (
-          <Entity>
+          <Entity id="startup" onClick={EntityAction}>
             <EntityName id="startup" onClick={EntityAction}>
-              Person/ StartUp
+              StartUp
             </EntityName>
           </Entity>
         )}
 
-        {entity === 'partner' && (
-          <Entity background="#34abde" color="#ffffff">
-            <EntityName id="partner" onClick={EntityAction}>
-              Partner Org
+        {entity === 'individual' && (
+          <Entity
+            background="#34abde"
+            color="#ffffff"
+            id="individual"
+            onClick={EntityAction}
+          >
+            <EntityName id="individual" onClick={EntityAction}>
+              Individual
             </EntityName>
           </Entity>
         )}
-        {entity !== 'partner' && (
-          <Entity>
-            <EntityName id="partner" onClick={EntityAction}>
-              Partner Org
+        {entity !== 'individual' && (
+          <Entity id="individual" onClick={EntityAction}>
+            <EntityName id="individual" onClick={EntityAction}>
+              Individual
             </EntityName>
           </Entity>
         )}
@@ -277,7 +300,7 @@ export function SignupForm() {
       <SubText left={198} top={788} fontWeight="300" width={271}>
         Already on GHN Connect?{' '}
       </SubText>
-      <BoldLink href="/access/signin">
+      <BoldLink href="/signin">
         <SubText
           left={451}
           top={788}
