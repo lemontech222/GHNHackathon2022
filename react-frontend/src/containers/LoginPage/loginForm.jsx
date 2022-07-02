@@ -1,9 +1,11 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import { Button } from '../../components/Button';
 import { InputField } from '../../components/InputField';
 import GoogleIcon from '../../images/icons/google.png';
+import Axios from 'axios';
 
-const LoginFormContainer = styled.div`
+const LoginFormContainer = styled.form`
     position: absolute;
     width: 484px;
     height: 718px;
@@ -73,16 +75,51 @@ export const BoldLink = styled.a`
 `;
 
 export function LoginForm() {
+  const [email, setEmail] = useState('');
+
+  const [password, setPassword] = useState();
+
+  const signIn = async (e) => {
+    e.preventDefault();
+
+    Axios({
+      method: 'post',
+      url: 'api/token/',
+      data: {
+        email: email,
+        password: password,
+      },
+    }).then(
+      (response) => {
+        console.log(response);
+      },
+      (err) => {
+        console.log('Error: ', err);
+      }
+    );
+  };
+
   return (
-    <LoginFormContainer>
+    <LoginFormContainer onSubmit={signIn}>
       <Title>Sign in</Title>
       <SubText>Stay up to date on the GHN platform</SubText>
-      <InputField placeholder="Email or Username" />
-      <InputField type="password" placeholder="Password" top={274} />
+      <InputField
+        type="email"
+        placeholder="Email or Username"
+        onChange={(e) => setEmail(e.target.value)}
+        required={true}
+      />
+      <InputField
+        type="password"
+        placeholder="Password"
+        top={274}
+        onChange={(e) => setPassword(e.target.value)}
+        required={true}
+      />
       <SubText top={368} color="#34ABDE" width={210}>
         Forgot password?
       </SubText>
-      <Button>
+      <Button type="submit">
         <SubText
           top={26}
           left={140}
@@ -112,7 +149,7 @@ export function LoginForm() {
       <SubText left={6} top={670} fontWeight="300" width={371}>
         New to GHN Connect?{' '}
       </SubText>
-      <BoldLink href="/access/signup">
+      <BoldLink href="/signup">
         <SubText
           left={160}
           top={670}
