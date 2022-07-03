@@ -43,6 +43,7 @@ export const SubText = styled.p`
   font-weight: ${({ fontWeight }) => (fontWeight ? fontWeight : '400')};
   font-size: ${({ fontSize }) => (fontSize ? fontSize + 'px' : '20px')};
   line-height: 24px;
+  text-align: ${({ align }) => (align ? align : 'left')};
 
   color: ${({ color }) => (color ? color : '#000000')};
 `;
