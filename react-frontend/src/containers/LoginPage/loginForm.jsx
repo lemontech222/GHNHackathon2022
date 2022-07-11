@@ -4,6 +4,7 @@ import { Button } from '../../components/Button';
 import { InputField } from '../../components/InputField';
 import GoogleIcon from '../../images/icons/google.png';
 import Axios from 'axios';
+import Cookies from 'js-cookie';
 
 const LoginFormContainer = styled.form`
     position: absolute;
@@ -80,6 +81,8 @@ export function LoginForm() {
 
   const [password, setPassword] = useState();
 
+  const [error, setError] = useState({});
+
   const signIn = async (e) => {
     e.preventDefault();
 
@@ -93,9 +96,13 @@ export function LoginForm() {
     }).then(
       (response) => {
         console.log(response);
+        Cookies.set('jwt_access', response.data.access);
+        Cookies.set('jwt_refresh', response.data.refresh);
+        window.location.href = '/dashboard';
       },
       (err) => {
         console.log('Error: ', err);
+        setError(err.response.data);
       }
     );
   };
@@ -104,6 +111,11 @@ export function LoginForm() {
     <LoginFormContainer onSubmit={signIn}>
       <Title>Sign in</Title>
       <SubText>Stay up to date on the GHN platform</SubText>
+      {error.detail && (
+        <SubText top={135} left={26} fontSize={14} width={398} color="red">
+          {error.detail}
+        </SubText>
+      )}
       <InputField
         type="email"
         placeholder="Email or Username"
@@ -120,34 +132,43 @@ export function LoginForm() {
       <SubText top={368} color="#34ABDE" width={210}>
         Forgot password?
       </SubText>
-      <Button type="submit">
+      <Button absolute top={422} left={26} type="submit">
         <SubText
           top={26}
           left={140}
           width={135}
           fontWeight="600"
+          align="center"
           color="#FFFFFF"
         >
           Sign in
         </SubText>
       </Button>
       <Line />
-      <SubText top={518} left={220} width={44}>
+      <SubText top={518} left={220} width={44} align="center">
         Or
       </SubText>
       <Line left={278} />
       <Button
+        absolute
         bgcolor="#FFFFFF"
         border="1px solid #000000"
         color="#000000"
         top={564}
+        left={26}
       >
         <Icon />{' '}
-        <SubText top={19} left={114} width={248} fontWeight="600">
+        <SubText
+          top={19}
+          left={114}
+          width={248}
+          fontWeight="600"
+          align="center"
+        >
           Sign in with Google
         </SubText>
       </Button>
-      <SubText left={6} top={670} fontWeight="300" width={371}>
+      <SubText left={6} top={670} fontWeight="300" width={371} align="center">
         New to GHN Connect?{' '}
       </SubText>
       <BoldLink href="/signup">
@@ -157,6 +178,7 @@ export function LoginForm() {
           fontWeight="300"
           width={371}
           color="#34ABDE"
+          align="center"
         >
           Join now
         </SubText>

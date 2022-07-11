@@ -303,23 +303,25 @@ export function SignupForm() {
         </BoldLink>
         .
       </SubText>
-      <Button top={560} width={628} left={58} type="submit">
+      <Button absolute top={560} width={628} left={58} type="submit">
         <SubText
           top={26}
           left={247}
           width={135}
           fontWeight="600"
           color="#FFFFFF"
+          align="center"
         >
           Agree & Join
         </SubText>
       </Button>
       <Line left={58} top={664} width={260} />
-      <SubText top={647} left={353} width={44}>
+      <SubText top={647} left={353} width={44} align="center">
         Or
       </SubText>
       <Line left={426} top={664} width={260} />
       <Button
+        absolute
         bgcolor="#FFFFFF"
         border="1px solid #000000"
         color="#000000"
@@ -342,6 +344,7 @@ export function SignupForm() {
           fontWeight="300"
           width={125}
           color="#34ABDE"
+          align="center"
         >
           Sign in
         </SubText>
