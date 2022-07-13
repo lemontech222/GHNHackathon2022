@@ -74,6 +74,8 @@ export function SignupForm() {
 
   const [url, setUrl] = useState('');
 
+  const [error, setError] = useState({});
+
   const EntityAction = (e) => {
     setEntity(e.target.id);
   };
@@ -110,6 +112,7 @@ export function SignupForm() {
         },
         (err) => {
           console.log('Error: ', err);
+          setError(err.response.data);
         }
       );
   };
@@ -192,6 +195,11 @@ export function SignupForm() {
         onChange={(e) => setFirstName(e.target.value)}
         required={true}
       />
+      {error.first_name && (
+        <SubText top={206} left={58} fontSize={12} width={298} color="red">
+          {error.first_name[0]}
+        </SubText>
+      )}
       <InputField
         placeholder="Last name"
         typ="text"
@@ -202,6 +210,11 @@ export function SignupForm() {
         onChange={(e) => setLastName(e.target.value)}
         required={true}
       />
+      {error.last_name && (
+        <SubText top={206} left={388} fontSize={12} width={298} color="red">
+          {error.last_name[0]}
+        </SubText>
+      )}
       <InputField
         placeholder="Username"
         type="text"
@@ -212,6 +225,11 @@ export function SignupForm() {
         onChange={(e) => setUserName(e.target.value)}
         required={true}
       />
+      {error.username && (
+        <SubText top={295} left={58} fontSize={12} width={298} color="red">
+          {error.username[0]}
+        </SubText>
+      )}
       <InputField
         placeholder="Email"
         type="email"
@@ -222,6 +240,11 @@ export function SignupForm() {
         onChange={(e) => setEmail(e.target.value)}
         required={true}
       />
+      {error.email && (
+        <SubText top={384} left={58} fontSize={12} width={298} color="red">
+          {error.email[0]}
+        </SubText>
+      )}
       <InputField
         type="password"
         name="password"
@@ -232,6 +255,11 @@ export function SignupForm() {
         onChange={(e) => setPassword(e.target.value)}
         required={true}
       />
+      {error.password && (
+        <SubText top={473} left={58} fontSize={12} width={298} color="red">
+          {error.password[0]}
+        </SubText>
+      )}
 
       <InputField
         type="password"
@@ -254,7 +282,14 @@ export function SignupForm() {
         </SubText>
       )}
 
-      <SubText left={83} top={500} fontWeight="300" width={570} fontSize={15}>
+      <SubText
+        left={83}
+        top={500}
+        fontWeight="300"
+        width={570}
+        fontSize={15}
+        align="center"
+      >
         By clicking Agree & Join, you agree to the GHN{' '}
         <BoldLink fontSize={15} href="#">
           User Agreement,
@@ -268,23 +303,25 @@ export function SignupForm() {
         </BoldLink>
         .
       </SubText>
-      <Button top={560} width={628} left={58} type="submit">
+      <Button absolute top={560} width={628} left={58} type="submit">
         <SubText
           top={26}
           left={247}
           width={135}
           fontWeight="600"
           color="#FFFFFF"
+          align="center"
         >
           Agree & Join
         </SubText>
       </Button>
       <Line left={58} top={664} width={260} />
-      <SubText top={647} left={353} width={44}>
+      <SubText top={647} left={353} width={44} align="center">
         Or
       </SubText>
       <Line left={426} top={664} width={260} />
       <Button
+        absolute
         bgcolor="#FFFFFF"
         border="1px solid #000000"
         color="#000000"
@@ -307,6 +344,7 @@ export function SignupForm() {
           fontWeight="300"
           width={125}
           color="#34ABDE"
+          align="center"
         >
           Sign in
         </SubText>

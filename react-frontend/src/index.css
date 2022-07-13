@@ -20,3 +20,51 @@ code {
   padding: 0;
   box-sizing: border-box
 }
+
+.dropzone {
+  text-align: center;
+  padding: 20px;
+  border: 3px #34abde dashed;
+  border-radius: 12px;
+  width: 100%;
+  margin: auto;
+}
+
+.dropzone-content {
+  font-size: 20px;
+}
+
+.btn {
+  border: none;
+  text-align: center;
+  background-color: rgb(218, 216, 216);
+  height: 50px;
+  border-radius: 12px;
+  color: black;
+  font-size: 18px;
+  font-weight: bold;
+  transition-duration: 0.6s;
+}
+
+.btn:hover {
+  background-color: #34abde;
+  color: #ffffff;
+}
+
+.file-list {
+  /* border: 3px dotted black; */
+  display: flex !important;
+  flex-wrap: wrap;
+  /* width: 500px; */
+  /* height: 200px; */
+  padding: 10px 20px;
+  /* margin: 20px 30px; */
+  /* border: 3px dotted black; */
+}
+
+.file-list img {
+  height: 100%;
+  width: 100px;
+  padding-right: 10px;
+  object-fit: cover;
+}
