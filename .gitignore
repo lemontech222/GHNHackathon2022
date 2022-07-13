@@ -164,6 +164,7 @@ cython_debug/
 # Miscellaneous
 cheatsheet.txt
 requirements.txt
+todo.txt
 
 # PyCharm
 #  JetBrains specific template is maintained in a separate JetBrains.gitignore that can

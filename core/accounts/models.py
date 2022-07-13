@@ -44,6 +44,9 @@ class User(AbstractUser):
     username=models.CharField(max_length=150,unique=True)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=150)
+    is_hub_admin = models.BooleanField(default=False)
+    is_startup_admin = models.BooleanField(default=False)
+
     objects = CustomUserManager()
     
     USERNAME_FIELD = 'email'
