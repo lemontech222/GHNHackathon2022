@@ -20,14 +20,14 @@ const MiddleSection = styled.div`
   justify-content: center;
 `;
 
-const Name = styled.h3`
+export const Name = styled.h3`
   font-size: 15px;
   font-weight: 700;
   margin: 0;
   color: #484848;
 `;
 
-const Message = styled.p`
+export const Message = styled.p`
   font-size: 13;
   margin: 0;
   color: #484848;

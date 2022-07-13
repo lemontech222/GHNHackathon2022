@@ -6,7 +6,7 @@ import { Marginer } from '../Marginer';
 export const SubContainer = styled.div`
   width: 100%;
   background: #ffffff;
-  margin-top: 50px;
+  margin-top: 30px;
   border-radius: 10px;
   box-shadow: 0px 1px 0px 0px #cac1c1;
   display: flex;
@@ -24,7 +24,7 @@ export const HeaderContainer = styled.div`
   border-bottom: ${({ borderBottom }) =>
     borderBottom ? '1px solid rgba(72, 72, 72, 0.2)' : 'none'};
   padding: 10px 20px;
-  font-weight: 900;
+  //   font-weight: 900;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -32,10 +32,10 @@ export const HeaderContainer = styled.div`
 
 const HubLogo = styled.div`
   position: absolute;
-  width: 120px;
-  min-height: 100px;
+  width: 125px;
+  min-height: 120px;
   left: 340px;
-  top: 255px;
+  top: 210px;
   background: #ffffff;
   border-radius: 50%;
   display: flex;

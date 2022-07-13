@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { CreatePost } from './createPost';
+import { LatestPost } from './latestPost';
 
 const MiddleSectionContainer = styled.div`
   width: 55%;
@@ -12,6 +13,7 @@ export function MiddleSection() {
   return (
     <MiddleSectionContainer>
       <CreatePost />
+      <LatestPost />
     </MiddleSectionContainer>
   );
 }

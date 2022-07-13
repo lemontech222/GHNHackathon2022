@@ -13,6 +13,7 @@ const ButtonContainer = styled.button`
   color: ${({ color }) => (color ? color : '#ffffff')};
   outline: none;
   border: ${({ border }) => (border ? border : 'none')};
+  margin: ${({ margin }) => (margin ? margin + 'px' : 'none')};
 
   background: ${({ bgcolor }) => (bgcolor ? bgcolor : '#34abde')};
   border-radius: ${({ bradius }) => (bradius ? bradius + 'px' : '60px')};
@@ -39,6 +40,8 @@ export function Button(props) {
     width,
     height,
     bradius,
+    margin,
+    id,
   } = props;
   return (
     <ButtonContainer
@@ -54,6 +57,8 @@ export function Button(props) {
       width={width}
       height={height}
       bradius={bradius}
+      margin={margin}
+      id={id}
     >
       {props.children}
     </ButtonContainer>
