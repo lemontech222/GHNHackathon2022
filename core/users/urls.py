@@ -3,7 +3,8 @@ from .views import (
                     HubAdminUserCreate, 
                     StartupUserCreate, 
                     IndividualUserCreate,
-                    UserModelViewset
+                    UserModelViewset,
+                    InnovatorsCount
                     )
 from rest_framework.routers import DefaultRouter
 
@@ -14,5 +15,6 @@ urlpatterns = [
     path('register/', IndividualUserCreate.as_view(), name='create_user'),
     path('register_hub/', HubAdminUserCreate.as_view(), name='create_hub_user'),
     path('register_startup/', StartupUserCreate.as_view(), name='create_startup_user'),
+    path('innovators/count/', InnovatorsCount.as_view(), name='innovators_count'),
 ] + router.urls
 

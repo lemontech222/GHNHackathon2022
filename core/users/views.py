@@ -96,3 +96,8 @@ class IndividualUserCreate(APIView):
         return Response(reg_serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
 
+class InnovatorsCount(APIView):
+    permission_classes = [AllowAny]
+    def get(self,request):
+        innovators_count = Startup.objects.all().count()
+        return Response({'innovators_count':innovators_count}, status=status.HTTP_200_OK)
