@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
 const ButtonContainer = styled.button`
-  position: absolute;
+  position: ${({ absolute }) => (absolute ? 'absolute' : 'none')};
   width: ${({ width }) => (width ? width + 'px' : '432px')};
-  height: 75px;
-  left: ${({ left }) => (left ? left + 'px' : '26px')};
-  top: ${({ top }) => (top ? top + 'px' : '422px')};
+  height: ${({ height }) => (height ? height + 'px' : '75px')};
+  left: ${({ left }) => (left ? left + 'px' : 'none')};
+  top: ${({ top }) => (top ? top + 'px' : 'none')};
   font-style: normal;
   font-weight: ${({ fontWeight }) => (fontWeight ? fontWeight : '600')};
   font-size: ${({ size }) => (size ? size + 'px' : '24px')};
@@ -13,9 +13,10 @@ const ButtonContainer = styled.button`
   color: ${({ color }) => (color ? color : '#ffffff')};
   outline: none;
   border: ${({ border }) => (border ? border : 'none')};
+  margin: ${({ margin }) => (margin ? margin + 'px' : 'none')};
 
   background: ${({ bgcolor }) => (bgcolor ? bgcolor : '#34abde')};
-  border-radius: 60px;
+  border-radius: ${({ bradius }) => (bradius ? bradius + 'px' : '60px')};
 
   &:hover {
     filter: contrast(0.8);
@@ -27,8 +28,21 @@ const ButtonContainer = styled.button`
 `;
 
 export function Button(props) {
-  const { size, color, click, top, bgcolor, border, left, fontWeight, width } =
-    props;
+  const {
+    size,
+    color,
+    click,
+    top,
+    bgcolor,
+    border,
+    left,
+    fontWeight,
+    width,
+    height,
+    bradius,
+    margin,
+    id,
+  } = props;
   return (
     <ButtonContainer
       size={size}
@@ -41,6 +55,10 @@ export function Button(props) {
       left={left}
       fontWeight={fontWeight}
       width={width}
+      height={height}
+      bradius={bradius}
+      margin={margin}
+      id={id}
     >
       {props.children}
     </ButtonContainer>

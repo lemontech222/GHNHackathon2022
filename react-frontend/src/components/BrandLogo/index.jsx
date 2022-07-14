@@ -10,9 +10,10 @@ const BrandLogoContainer = styled.div`
   align-items: center;
 `;
 
-const LogoImage = styled.div`
-  width: ${({ size }) => (size ? size + 'px' : '2em')};
-  height: ${({ size }) => (size ? size + 'px' : '2em')};
+export const LogoImage = styled.div`
+  width: ${({ size }) => (size ? size + 'em' : '2em')};
+  height: ${({ size }) => (size ? size + 'em' : '2em')};
+  border-radius: ${({ rounded }) => (rounded ? '50%' : 'none')};
 
   img {
     width: 100%;
