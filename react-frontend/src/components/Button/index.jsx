@@ -42,6 +42,7 @@ export function Button(props) {
     bradius,
     margin,
     id,
+    absolute,
   } = props;
   return (
     <ButtonContainer
@@ -59,6 +60,7 @@ export function Button(props) {
       bradius={bradius}
       margin={margin}
       id={id}
+      absolute={absolute}
     >
       {props.children}
     </ButtonContainer>
