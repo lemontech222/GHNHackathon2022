@@ -8,15 +8,36 @@ from .models import Hub, Profile, Startup
 from .serializers import (
                         MyTokenObtainPairSerializer,
                         UserSerializer, 
-                        RegisterUserSerializer
+                        RegisterUserSerializer,
+                        HubSerializer
                     )
 from rest_framework.views import APIView
 from rest_framework.permissions import (
+                        SAFE_METHODS, 
+                        BasePermission,
                         AllowAny,
                         IsAdminUser,
                         DjangoModelPermissionsOrAnonReadOnly
                     )
 from rest_framework_simplejwt.views import TokenObtainPairView
+
+
+class CurrentUserProfilePermission(BasePermission):
+    message = 'Editing posts is restricted to the author only'
+
+    def has_object_permission(self, request, view, obj):
+        if request.method in SAFE_METHODS:
+            return True
+        return obj == request.user
+
+class HubProfilePermission(BasePermission):
+    message = 'Unauthorized access'
+
+    def has_object_permission(self, request, view, obj):
+        if request.method in SAFE_METHODS:
+            return True
+        return request.user in obj.users.all()
+
 
 # Customize Token claims
 class MyTokenObtainPairView(TokenObtainPairView):
@@ -101,3 +122,22 @@ class InnovatorsCount(APIView):
     def get(self,request):
         innovators_count = Startup.objects.all().count()
         return Response({'innovators_count':innovators_count}, status=status.HTTP_200_OK)
+
+
+class UserProfile(generics.RetrieveUpdateAPIView, CurrentUserProfilePermission):
+    permission_classes = [CurrentUserProfilePermission]
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class HubList(generics.ListAPIView):
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
+    queryset = Hub.objects.all()
+    serializer_class = HubSerializer
+
+
+class HubDetails(generics.RetrieveUpdateAPIView, HubProfilePermission):
+    permission_classes = [HubProfilePermission]
+    queryset = Hub.objects.all()
+    serializer_class = HubSerializer
+

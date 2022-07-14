@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from accounts.models import User
+from .models import Hub
 
 # Customize token claims serializer
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -20,7 +21,8 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id','email','username','password','first_name','last_name')
+        fields = ('id','email','username','first_name','last_name')
+
 
 class RegisterUserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -38,3 +40,9 @@ class RegisterUserSerializer(serializers.ModelSerializer):
         return instance
 
  
+class HubSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Hub
+        fields = ('id','users','hub_name','description','contact',
+                    'physical_address','gps_address','business_registration_number')
+

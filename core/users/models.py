@@ -16,7 +16,7 @@ class Profile(models.Model):
 
 # Hub
 class Hub(models.Model):
-    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+    users = models.ManyToManyField(User, related_name="admins")
     hub_name = models.CharField(max_length=255, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
     contact = models.CharField(max_length=20, null=True, blank=True)
@@ -27,7 +27,7 @@ class Hub(models.Model):
     # business certificate pic or pdf
 
     def __str__(self):
-        return f'{self.user.username} hub'
+        return f'{self.hub_name} hub'
 
 # Hub
 class Startup(models.Model):
@@ -43,6 +43,19 @@ class Startup(models.Model):
 
     def __str__(self):
         return f'{self.user.username} hub'
+
+
+class StartupPortfolio(models.Model):
+    startup = models.ForeignKey(Startup, on_delete=models.CASCADE)
+    project_title = models.CharField(max_length=255)
+    project_description = models.TextField(blank=True)
+    project_link = models.TextField(blank=True)
+    # project_image
+    start_date = models.DateTimeField(null=True, blank=True)
+    end_date = models.DateTimeField(null=True, blank=True)
+
+    def __str__(self):
+        return self.project_title
 
 
 # Portfolio
