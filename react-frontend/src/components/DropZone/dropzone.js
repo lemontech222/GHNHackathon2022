@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDropzone } from 'react-dropzone';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function Dropzone({ onDrop, accept, open }) {
   const { getRootProps, getInputProps, isDragActive, acceptedFiles } =
@@ -12,20 +13,21 @@ function Dropzone({ onDrop, accept, open }) {
   ));
 
   return (
-    <>
+    <div>
       <div {...getRootProps({ className: 'dropzone' })}>
         <input className="input-zone" {...getInputProps()} />
         <div className="text-center">
-          {isDragActive ? (
-            <p className="dropzone-content">Release to drop the files</p>
-          ) : (
-            <>
-              <p className="dropzone-content">Drag' n' drop to Add Photos</p>
-              <p className="dropzone-content">Or</p>
-            </>
-          )}
           <button type="button" onClick={open} className="btn">
-            Click to select files
+            {isDragActive ? (
+              <p className="dropzone-content">Release to drop the files</p>
+            ) : (
+              <>
+                {/* <FontAwesomeIcon icon={fa} /> */}
+                <p className="dropzone-content">Add Photos</p>
+                <p className="dropzone-content">Or</p>
+              </>
+            )}
+            Drag and Drop to Add
           </button>
         </div>
       </div>
@@ -33,7 +35,7 @@ function Dropzone({ onDrop, accept, open }) {
       {/* <aside>
         <ul>{files}</ul>
       </aside> */}
-    </>
+    </div>
   );
 }
 

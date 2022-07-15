@@ -38,7 +38,7 @@ code {
   border: none;
   text-align: center;
   background-color: rgb(218, 216, 216);
-  height: 50px;
+  /* height: 50px; */
   border-radius: 12px;
   color: black;
   font-size: 18px;
@@ -46,10 +46,10 @@ code {
   transition-duration: 0.6s;
 }
 
-.btn:hover {
+/* .btn:hover {
   background-color: #34abde;
   color: #ffffff;
-}
+} */
 
 .file-list {
   /* border: 3px dotted black; */

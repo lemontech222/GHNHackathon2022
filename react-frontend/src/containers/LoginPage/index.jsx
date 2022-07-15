@@ -47,7 +47,7 @@ export function LoginPage(props) {
     <AccountContext.Provider value={contextValue}>
       <Logincontainer>
         <LogoContainer>
-          <BrandLogo hideLogoTitle logoSize={160} />
+          <BrandLogo hideLogoTitle logoSize={10} />
         </LogoContainer>
         {active.action === 'signin' && <LoginForm />}
         {active.action === 'signup' && <SignupForm />}
