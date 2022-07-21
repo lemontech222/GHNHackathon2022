@@ -30,3 +30,9 @@ class EventListCreate(generics.ListCreateAPIView):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
 
+
+class EventRetrieveUpdateDestroyCreate(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
+    queryset = Event.objects.all()
+    serializer_class = EventSerializer
+

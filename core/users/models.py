@@ -25,6 +25,7 @@ class Hub(models.Model):
     date_joined = models.DateTimeField(auto_now_add=True)
     business_registration_number = models.CharField(max_length=100, null=True, blank=True)
     # business certificate pic or pdf
+    newly_created = models.BooleanField(default=True)
 
     def __str__(self):
         return f'{self.hub_name} hub'
