@@ -9,7 +9,7 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/:action" element={<LoginPage />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/" element={<Dashboard />} />
       </Routes>
     </div>
   );
