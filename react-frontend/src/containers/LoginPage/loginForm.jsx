@@ -21,13 +21,13 @@ const LoginFormContainer = styled.form`
 export const Title = styled.h1`
   position: absolute;
   height: ${({ height }) => (height ? height + 'px' : '66px')};
-  width: ${({ width }) => (width ? width + 'px' : '171px')};
+  // width: ${({ width }) => (width ? width + 'px' : '150px')};
   left: ${({ left }) => (left ? left + 'px' : '26px')};
   top: ${({ top }) => (top ? top + 'px' : '49px')};
 
   font-style: normal;
   font-weight: ${({ fontWeight }) => (fontWeight ? fontWeight : '500')};
-  font-size: ${({ fontSize }) => (fontSize ? fontSize + 'px' : '50px')};
+  font-size: ${({ fontSize }) => (fontSize ? fontSize + 'px' : '40px')};
   line-height: 61px;
 
   color: #000000;
