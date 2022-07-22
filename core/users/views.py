@@ -45,7 +45,7 @@ class MyTokenObtainPairView(TokenObtainPairView):
 
 # User views with model viewsets
 class UserModelViewset(viewsets.ModelViewSet):
-    permission_classes = [IsAdminUser]
+    permission_classes = [AllowAny]
     serializer_class = UserSerializer
     # queryset = User.objects.all()
 
@@ -70,8 +70,13 @@ class HubAdminUserCreate(APIView):
             newuser = reg_serializer.save()
 
             if newuser:
+                # Set as hub admin
+                newuser.is_hub_admin=True
+                newuser.save()
+                
                 # Create new Hub
-                hub = Hub.objects.create(user=newuser)
+                hub = Hub.objects.create(hub_name="")
+                hub.users.add(newuser)
                 hub.save()
 
                 # Create user profile
@@ -90,6 +95,10 @@ class StartupUserCreate(APIView):
             newuser = reg_serializer.save()
 
             if newuser:
+                # Set as hub admin
+                newuser.is_startup_admin=True
+                newuser.save()
+
                 # Create new Hub
                 startup = Startup.objects.create(user=newuser)
                 startup.save()
