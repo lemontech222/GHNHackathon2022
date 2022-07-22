@@ -136,6 +136,14 @@ class HubList(generics.ListAPIView):
     serializer_class = HubSerializer
 
 
+class GetUserHubDetail(APIView):
+    permission_classes = [HubProfilePermission]
+    def get(self, request, format=None):
+        hub = Hub.objects.get(users__id=request.user.id)
+        serializer = HubSerializer(hub)
+        return Response(serializer.data)
+
+
 class HubDetails(generics.RetrieveUpdateAPIView, HubProfilePermission):
     permission_classes = [HubProfilePermission]
     queryset = Hub.objects.all()

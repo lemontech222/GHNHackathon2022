@@ -7,7 +7,8 @@ from .views import (
                     InnovatorsCount,
                     UserProfile,
                     HubDetails,
-                    HubList
+                    HubList,
+                    GetUserHubDetail
                     )
 from rest_framework.routers import DefaultRouter
 
@@ -21,6 +22,7 @@ urlpatterns = [
     path('innovators/count/', InnovatorsCount.as_view(), name='innovators_count'),
     path('user/<int:pk>/', UserProfile.as_view(), name='user_profile'),
     path('hubs/<int:pk>/', HubDetails.as_view(), name='hub_profile'),
+    path('get_hub/', GetUserHubDetail.as_view(), name='get_user_hubs'),
     path('hubs/', HubList.as_view(), name='hub_list'),
 ] + router.urls
 

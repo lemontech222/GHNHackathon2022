@@ -43,7 +43,5 @@ class RegisterUserSerializer(serializers.ModelSerializer):
 class HubSerializer(serializers.ModelSerializer):
     class Meta:
         model = Hub
-        fields = ('id','users','hub_name','description','contact',
-                    'physical_address','gps_address','business_registration_number',
-                    'newly_created')
+        fields = '__all__'
 
