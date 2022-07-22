@@ -9,6 +9,7 @@ import { Marginer } from '../../../components/Marginer';
 import UploadPhotos from '../../../components/DropZone';
 import Axios from 'axios';
 import { Input, TextArea } from '../../../components/Input';
+import Cookies from 'js-cookie';
 
 const TopDesign = styled.div`
   width: 100%;
@@ -143,6 +144,7 @@ function CreateEventModal(props) {
 
   const PostEvent = async (e) => {
     e.preventDefault();
+    const token = Cookies.get('jwt_access');
 
     Axios({
       method: 'post',
@@ -157,6 +159,9 @@ function CreateEventModal(props) {
         start_date: startDate,
         end_date: endDate,
         recurring: recur,
+      },
+      headers: {
+        Authorization: `Bearer ${token}`,
       },
     }).then(
       (response) => {

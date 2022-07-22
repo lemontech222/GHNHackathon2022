@@ -98,7 +98,7 @@ export function LoginForm() {
         console.log(response);
         Cookies.set('jwt_access', response.data.access);
         Cookies.set('jwt_refresh', response.data.refresh);
-        window.location.href = '/dashboard';
+        window.location.href = '/';
       },
       (err) => {
         console.log('Error: ', err);
