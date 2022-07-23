@@ -9,6 +9,17 @@ from rest_framework.permissions import (
 from .models import Event
 from .serializers import EventSerializer
 
+# Permission classes
+
+class HubProfilePermission(BasePermission):
+    message = 'Unauthorized access'
+
+    def has_object_permission(self, request, view, obj):
+        if request.method in SAFE_METHODS:
+            return True
+        return request.user in obj.users.all()
+
+
 class CreateEventPermission(BasePermission):
     message = 'Unauthorized access'
 
@@ -26,7 +37,7 @@ class EventsCount(APIView):
 
 
 class EventListCreate(generics.ListCreateAPIView):
-    permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
+    permission_classes = [HubProfilePermission]
     queryset = Event.objects.all()
     serializer_class = EventSerializer
 
