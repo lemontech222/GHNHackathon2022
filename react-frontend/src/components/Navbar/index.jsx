@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCog, faDoorOpen, faUser } from '@fortawesome/free-solid-svg-icons';
 import { SearchBox } from '../SearchBox';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import Cookies from 'js-cookie';
 
 const NavbarContainer = styled.nav`
   width: 100%;
@@ -153,7 +154,10 @@ export function Navbar(props) {
                   <FontAwesomeIcon icon={faCog} fontSize={15} /> Settings
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="/">
+                <NavDropdown.Item
+                  href="/home"
+                  onClick={() => Cookies.set('jwt_access', '')}
+                >
                   <FontAwesomeIcon icon={faDoorOpen} fontSize={15} /> Logout
                 </NavDropdown.Item>
               </NavDropdown>
