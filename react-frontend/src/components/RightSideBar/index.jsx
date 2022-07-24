@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Events } from './events';
 
 const SideBarContainer = styled.div`
   width: 20%;
@@ -8,5 +9,9 @@ const SideBarContainer = styled.div`
 `;
 
 export function RightSideBar() {
-  return <SideBarContainer></SideBarContainer>;
+  return (
+    <SideBarContainer>
+      <Events />
+    </SideBarContainer>
+  );
 }
