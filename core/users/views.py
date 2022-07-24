@@ -19,6 +19,7 @@ from rest_framework.permissions import (
                         IsAdminUser,
                         DjangoModelPermissionsOrAnonReadOnly
                     )
+from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 
@@ -155,6 +156,7 @@ class GetUserHubDetail(APIView):
 
 class HubDetails(generics.RetrieveUpdateAPIView, HubProfilePermission):
     permission_classes = [HubProfilePermission]
+    parser_classes = [MultiPartParser, FormParser]
     queryset = Hub.objects.all()
     serializer_class = HubSerializer
 

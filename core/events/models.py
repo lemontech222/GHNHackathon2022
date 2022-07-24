@@ -11,7 +11,7 @@ class Event(models.Model):
     number_of_seats = models.IntegerField(null=True, blank=True)
     gps_address = models.CharField(max_length=15)
     contact_person = models.CharField(max_length=20)
-    # flyer pic
+    event_pic = models.ImageField(default='User.png',upload_to='events_pics', null=True, blank=True)
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
     recurring = models.BooleanField(default=False)

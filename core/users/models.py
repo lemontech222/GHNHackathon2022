@@ -8,23 +8,24 @@ class Profile(models.Model):
     physical_address = models.TextField(null=True, blank=True)
     gps_address = models.CharField(max_length=15, null=True, blank=True)
     about = models.TextField(null=True, blank=True)
-    # profile_pic
+    profile_pic = models.ImageField(default='User.png',upload_to='profile_pics', null=True, blank=True)
 
     def __str__(self):
-        return f'{self.user.username} profile'
+        return f'{self.user.username} Profile'
 
 
 # Hub
 class Hub(models.Model):
     users = models.ManyToManyField(User, related_name="admins")
     hub_name = models.CharField(max_length=255, null=True, blank=True)
+    hub_profile_pic = models.ImageField(default='User.png',upload_to='hub_profile_pics', null=True, blank=True)
     description = models.TextField(null=True, blank=True)
     contact = models.CharField(max_length=20, null=True, blank=True)
     physical_address = models.TextField(null=True, blank=True)
     gps_address = models.CharField(max_length=15, null=True, blank=True)
     date_joined = models.DateTimeField(auto_now_add=True)
     business_registration_number = models.CharField(max_length=100, null=True, blank=True)
-    # business certificate pic or pdf
+    business_certificate = models.ImageField(default='User.png',upload_to='hub_certificates', null=True, blank=True)
     newly_created = models.BooleanField(default=True)
 
     def __str__(self):
@@ -40,7 +41,7 @@ class Startup(models.Model):
     gps_address = models.CharField(max_length=15, null=True, blank=True)
     date_joined = models.DateTimeField(auto_now_add=True)
     business_registration_number = models.CharField(max_length=100, null=True, blank=True)
-    # business certificate pic or pdf
+    business_certificate = models.ImageField(default='User.png',upload_to='innovators_certificates', null=True, blank=True)
 
     def __str__(self):
         return f'{self.user.username} hub'
@@ -51,7 +52,7 @@ class StartupPortfolio(models.Model):
     project_title = models.CharField(max_length=255)
     project_description = models.TextField(blank=True)
     project_link = models.TextField(blank=True)
-    # project_image
+    project_image = models.ImageField(default='User.png',upload_to='innovator_portfolio_projects', null=True, blank=True)
     start_date = models.DateTimeField(null=True, blank=True)
     end_date = models.DateTimeField(null=True, blank=True)
 
@@ -65,7 +66,7 @@ class Portfolio(models.Model):
     project_title = models.CharField(max_length=255)
     project_description = models.TextField(blank=True)
     project_link = models.TextField(blank=True)
-    # project_image
+    project_image = models.ImageField(default='User.png',upload_to='user_portfolio_projects', null=True, blank=True)
     start_date = models.DateTimeField(null=True, blank=True)
     end_date = models.DateTimeField(null=True, blank=True)
 

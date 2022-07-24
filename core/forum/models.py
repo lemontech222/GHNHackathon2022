@@ -8,7 +8,7 @@ class Thread(models.Model):
     content = models.TextField()
     slug = models.SlugField(max_length=250, unique_for_date="date_posted")
     date_posted = models.DateTimeField(auto_now_add=True)
-    # Thead image
+    # Thread image
 
     def __str__(self):
         return self.title
