@@ -80,7 +80,7 @@ const FormContainer = styled.form`
   padding: 10px;
 `;
 
-const AdjustHeight = (e) => {
+export const AdjustHeight = (e) => {
   e.target.style.height = e.target.scrollHeight + 'px';
 };
 
@@ -114,7 +114,7 @@ function CreatePostModal(props) {
         <Marginer direction="vertical" margin={20} />
         <Button
           click={props.onHide}
-          width={765}
+          width="765px"
           height={50}
           size={17}
           font-weight={400}
@@ -140,7 +140,7 @@ function CreateEventModal(props) {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [recur, setRecur] = useState(false);
-  const [error, setError] = useState({});
+  // const [error, setError] = useState({});
 
   const PostEvent = async (e) => {
     e.preventDefault();
@@ -169,7 +169,7 @@ function CreateEventModal(props) {
       },
       (err) => {
         console.log('Error: ', err);
-        setError(err.response.data);
+        // setError(err.response.data);
       }
     );
   };
@@ -251,7 +251,7 @@ function CreateEventModal(props) {
 
         <Marginer direction="vertical" margin={20} />
         <Button
-          width={765}
+          width="765px"
           height={50}
           size={17}
           font-weight={400}
@@ -290,7 +290,7 @@ export function CreatePost() {
         </LogoImage>
         <ActionButtons>
           <Button
-            width={150}
+            width="150px"
             height={50}
             size={17}
             font-weight={400}
@@ -302,7 +302,7 @@ export function CreatePost() {
             Create a Post
           </Button>
           <Button
-            width={150}
+            width="150px"
             height={50}
             size={17}
             font-weight={400}
@@ -314,7 +314,7 @@ export function CreatePost() {
             Create an Event
           </Button>
           <Button
-            width={150}
+            width="150px"
             height={50}
             size={17}
             font-weight={400}

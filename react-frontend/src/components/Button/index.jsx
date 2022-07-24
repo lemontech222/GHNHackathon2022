@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const ButtonContainer = styled.button`
   position: ${({ absolute }) => (absolute ? 'absolute' : 'none')};
-  width: ${({ width }) => (width ? width + 'px' : '432px')};
+  width: ${({ width }) => (width ? width : '432px')};
   height: ${({ height }) => (height ? height + 'px' : '75px')};
   left: ${({ left }) => (left ? left + 'px' : 'none')};
   top: ${({ top }) => (top ? top + 'px' : 'none')};

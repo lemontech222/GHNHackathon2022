@@ -303,7 +303,7 @@ export function SignupForm() {
         </BoldLink>
         .
       </SubText>
-      <Button absolute top={560} width={628} left={58} type="submit">
+      <Button absolute top={560} width="628px" left={58} type="submit">
         <SubText
           top={26}
           left={247}
@@ -327,7 +327,7 @@ export function SignupForm() {
         color="#000000"
         top={693}
         left={58}
-        width={628}
+        width="628px"
       >
         <Icon left={163} />{' '}
         <SubText top={19} left={237} width={248} fontWeight="600">
