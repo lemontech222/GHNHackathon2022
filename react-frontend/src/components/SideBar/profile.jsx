@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { BoldLink } from '../../containers/LoginPage/loginForm';
-import { BrandLogo } from '../BrandLogo';
+import { LogoImage } from '../BrandLogo';
+import { SubText } from '../Comon';
 import { Marginer } from '../Marginer';
 
 export const SubContainer = styled.div`
@@ -27,20 +28,20 @@ export const HeaderContainer = styled.div`
   padding: 10px 20px;
   //   font-weight: 900;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 `;
 
 const HubLogo = styled.div`
-  position: absolute;
-  width: 125px;
+  position: relative;
+  width: 120px;
   min-height: 120px;
-  left: 340px;
-  top: 210px;
+  top: 50%;
   background: #ffffff;
   border-radius: 50%;
   display: flex;
   justify-content: center;
+  align-items: center;
 `;
 
 export const Section = styled.div`
@@ -55,15 +56,21 @@ export const Section = styled.div`
   border-top: 1px solid rgba(72, 72, 72, 0.2);
 `;
 
-export function Profile() {
+export function Profile(props) {
+  const { hubProfile } = props;
   return (
     <SubContainer>
       <HeaderContainer>
         <HubLogo>
-          <BrandLogo hideLogoTitle logoSize={6} />
+          <LogoImage size={6}>
+            <img src={hubProfile.hub_profile_pic} alt="hub logo" />
+          </LogoImage>
         </HubLogo>
       </HeaderContainer>
-      <Marginer direction="vertical" margin={90} />
+      <Marginer direction="vertical" margin={60} />
+      <SubText align="center" color="#34abde" fontWeight={500}>
+        {hubProfile.hub_name}
+      </SubText>
 
       <Section>
         Communities <br /> 15

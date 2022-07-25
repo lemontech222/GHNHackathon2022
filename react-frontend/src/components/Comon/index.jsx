@@ -8,6 +8,7 @@ export const Title = styled.h1`
 `;
 
 export const SubText = styled.p`
+  width: 100%;
   font-style: normal;
   font-weight: ${({ fontWeight }) => (fontWeight ? fontWeight : '400')};
   font-size: ${({ fontSize }) => (fontSize ? fontSize + 'px' : '20px')};

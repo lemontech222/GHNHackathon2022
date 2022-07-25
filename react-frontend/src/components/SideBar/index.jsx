@@ -9,10 +9,11 @@ const SideBarContainer = styled.div`
   align-items: flex-start;
 `;
 
-export function SideBar() {
+export function SideBar(props) {
+  const { hubProfile } = props;
   return (
     <SideBarContainer>
-      <Profile />
+      <Profile hubProfile={hubProfile} />
       <Chat />
     </SideBarContainer>
   );

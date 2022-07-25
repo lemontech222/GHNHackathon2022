@@ -11,10 +11,11 @@ const MiddleSectionContainer = styled.div`
   align-items: flex-start;
 `;
 
-export function MiddleSection() {
+export function MiddleSection(props) {
+  const { hubProfile } = props;
   return (
     <MiddleSectionContainer>
-      <CreatePost />
+      <CreatePost hubProfile={hubProfile} />
       <Tabs />
       <HubCarousel />
       <LatestPost />
