@@ -33,7 +33,7 @@ export function Dashboard() {
       const profile = response.data;
       !profile.newly_created && setProfileExist(true);
       setHubProfile(response.data);
-      // console.log(hubProfile);
+      console.log(hubProfile);
       // console.log(profileExist);
     }
   };
@@ -47,8 +47,8 @@ export function Dashboard() {
       <Navbar username={decoded.username} />
       {profileExist && (
         <InnerPageContainer>
-          <SideBar />
-          <MiddleSection />
+          <SideBar hubProfile={hubProfile} />
+          <MiddleSection hubProfile={hubProfile} />
           <RightSideBar />
         </InnerPageContainer>
       )}

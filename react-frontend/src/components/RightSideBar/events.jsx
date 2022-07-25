@@ -2,6 +2,9 @@ import styled from 'styled-components';
 import { LogoImage } from '../BrandLogo';
 import { HeaderContainer, SubContainer } from '../SideBar/profile';
 import Logo from '../../images/logo/ghnlogo.png';
+import Axios from 'axios';
+import Cookies from 'js-cookie';
+import { useEffect, useState } from 'react';
 
 const MessageSection = styled.div`
   width: 100%;
@@ -34,6 +37,35 @@ export const Message = styled.p`
 `;
 
 export function Events() {
+  const [events, setEvents] = useState([]);
+
+  const GetEvents = async () => {
+    const token = Cookies.get('jwt_access');
+
+    Axios({
+      method: 'get',
+      url: 'api/events/',
+
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then(
+      (response) => {
+        setEvents(response.data);
+        // console.log(events);
+      },
+      (err) => {
+        console.log('Error: ', err);
+        // setError(err.response.data);
+      }
+    );
+    console.log(events);
+  };
+
+  useEffect(() => {
+    GetEvents();
+  }, []);
+
   return (
     <SubContainer>
       <HeaderContainer bg="#ffffff" height={60} borderBottom>

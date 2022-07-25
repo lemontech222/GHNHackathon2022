@@ -1,7 +1,5 @@
-import React from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-
 const responsive = {
   superLargeDesktop: {
     // the naming can be any, depends on you.
@@ -23,14 +21,5 @@ const responsive = {
 };
 
 export function MultiCarousel(props) {
-  return (
-    <Carousel
-      responsive={responsive}
-      centerMode={true}
-      autoPlay={false}
-      autoPlaySpeed={10000}
-    >
-      {props.children}
-    </Carousel>
-  );
+  return <Carousel responsive={responsive}>{props.children}</Carousel>;
 }
