@@ -6,19 +6,19 @@ from rest_framework import viewsets
 from accounts.models import User
 from .models import Hub, Profile, Startup
 from .serializers import (
-                        MyTokenObtainPairSerializer,
-                        UserSerializer, 
-                        RegisterUserSerializer,
-                        HubSerializer
-                    )
+                            MyTokenObtainPairSerializer,
+                            UserSerializer, 
+                            RegisterUserSerializer,
+                            HubSerializer
+                        )
 from rest_framework.views import APIView
 from rest_framework.permissions import (
-                        SAFE_METHODS, 
-                        BasePermission,
-                        AllowAny,
-                        IsAdminUser,
-                        DjangoModelPermissionsOrAnonReadOnly
-                    )
+                            SAFE_METHODS, 
+                            BasePermission,
+                            AllowAny,
+                            IsAdminUser,
+                            DjangoModelPermissionsOrAnonReadOnly
+                        )
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework_simplejwt.views import TokenObtainPairView
 

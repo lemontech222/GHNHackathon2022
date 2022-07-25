@@ -17,7 +17,7 @@ class Event(models.Model):
     recurring = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.title
+        return 'event'
 
 
 class EventApplication(models.Model):
