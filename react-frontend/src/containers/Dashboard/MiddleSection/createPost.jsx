@@ -4,12 +4,12 @@ import styled from 'styled-components';
 import { LogoImage } from '../../../components/BrandLogo';
 import { Button } from '../../../components/Button';
 import { SubContainer } from '../../../components/SideBar/profile';
-import Logo from '../../../images/logo/ghnlogo.png';
 import { Marginer } from '../../../components/Marginer';
 import UploadPhotos from '../../../components/DropZone';
 import Axios from 'axios';
 import { Input, TextArea } from '../../../components/Input';
 import Cookies from 'js-cookie';
+import { SubText } from '../../../components/Comon';
 
 const TopDesign = styled.div`
   width: 100%;
@@ -34,12 +34,6 @@ const Identifier = styled.div`
   align-items: flex-start;
 `;
 
-const Name = styled.h4`
-  font-weight: 600;
-  font-size: 16px;
-  margin: 8px;
-`;
-
 const PostText = styled.textarea`
   width: 100%;
   height: auto;
@@ -55,6 +49,7 @@ const PostText = styled.textarea`
 `;
 
 const ActionButtons = styled.div`
+  width: 60%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -85,6 +80,7 @@ export const AdjustHeight = (e) => {
 };
 
 function CreatePostModal(props) {
+  const { hubProfile } = props;
   return (
     <Modal
       {...props}
@@ -99,10 +95,12 @@ function CreatePostModal(props) {
       </Modal.Header>
       <Modal.Body>
         <Identifier>
-          <LogoImage size={5}>
-            <img src={Logo} alt="hub logo" />
+          <LogoImage size={6}>
+            <img src={hubProfile.hub_profile_pic} alt="hub logo" />
           </LogoImage>
-          <Name>GHN</Name>
+          <SubText color="#34abde" fontWeight={500}>
+            {hubProfile.hub_name}
+          </SubText>
         </Identifier>
         <ModalScroll>
           <Marginer direction="vertical" margin={20} />
@@ -131,6 +129,7 @@ function CreatePostModal(props) {
 }
 
 function CreateEventModal(props) {
+  const { hubProfile } = props;
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [location, setLocation] = useState('');
@@ -150,6 +149,7 @@ function CreateEventModal(props) {
       method: 'post',
       url: 'api/events/',
       data: {
+        hub: hubProfile.id,
         title: title,
         description: description,
         location: location,
@@ -188,10 +188,12 @@ function CreateEventModal(props) {
       </Modal.Header>
       <Modal.Body>
         <Identifier>
-          <LogoImage size={5}>
-            <img src={Logo} alt="hub logo" />
+          <LogoImage size={6}>
+            <img src={hubProfile.hub_profile_pic} alt="hub logo" />
           </LogoImage>
-          <Name>GHN</Name>
+          <SubText color="#34abde" fontWeight={500}>
+            {hubProfile.hub_name}
+          </SubText>
         </Identifier>
         <ModalScroll>
           <FormContainer>
@@ -268,7 +270,8 @@ function CreateEventModal(props) {
   );
 }
 
-export function CreatePost() {
+export function CreatePost(props) {
+  const { hubProfile } = props;
   const [showPost, setShowPost] = useState(false);
   const [showEvent, setShowEvent] = useState(false);
 
@@ -286,11 +289,11 @@ export function CreatePost() {
       <TopDesign />
       <CreatePostContainer>
         <LogoImage size={6}>
-          <img src={Logo} alt="hub logo" />
+          <img src={hubProfile.hub_profile_pic} alt="hub logo" />
         </LogoImage>
         <ActionButtons>
           <Button
-            width="150px"
+            width="40%"
             height={50}
             size={17}
             font-weight={400}
@@ -302,7 +305,7 @@ export function CreatePost() {
             Create a Post
           </Button>
           <Button
-            width="150px"
+            width="40%"
             height={50}
             size={17}
             font-weight={400}
@@ -314,7 +317,7 @@ export function CreatePost() {
             Create an Event
           </Button>
           <Button
-            width="150px"
+            width="40%"
             height={50}
             size={17}
             font-weight={400}
@@ -326,8 +329,16 @@ export function CreatePost() {
           </Button>
         </ActionButtons>
       </CreatePostContainer>
-      <CreatePostModal show={showPost} onHide={handleClose} />
-      <CreateEventModal show={showEvent} onHide={handleClose} />
+      <CreatePostModal
+        hubProfile={hubProfile}
+        show={showPost}
+        onHide={handleClose}
+      />
+      <CreateEventModal
+        hubProfile={hubProfile}
+        show={showEvent}
+        onHide={handleClose}
+      />
     </SubContainer>
   );
 }
