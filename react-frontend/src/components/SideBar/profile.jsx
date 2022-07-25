@@ -5,6 +5,7 @@ import { Marginer } from '../Marginer';
 
 export const SubContainer = styled.div`
   width: 100%;
+  min-height: ${({ height }) => (height ? height + 'vh' : '0')};
   background: #ffffff;
   margin-top: 30px;
   border-radius: 10px;
