@@ -5,6 +5,13 @@ from .models import Event
 
 
 class EventSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Event
+        fields = '__all__'
+
+
+
+class ListEventSerializer(serializers.ModelSerializer):
     hub = HubSerializer()
 
     class Meta:

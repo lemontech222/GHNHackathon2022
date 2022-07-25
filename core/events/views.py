@@ -1,3 +1,4 @@
+from email.mime import application
 from rest_framework import status, generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -7,8 +8,8 @@ from rest_framework.permissions import (
                                     )
 
 from users.models import Hub
-from .models import Event
-from .serializers import EventSerializer
+from .models import Event, EventApplication
+from .serializers import EventSerializer, ListEventSerializer
 # from users.serializers import HubSerializer
 
 from django.forms.models import model_to_dict
@@ -47,7 +48,7 @@ class EventsCount(APIView):
 class EventsList(APIView):
     def get(self, request, *args, **kwargs):
         events = Event.objects.prefetch_related('hub').all()
-        data = EventSerializer(events, many=True).data
+        data = ListEventSerializer(events, many=True).data
         return Response(data)
 
 # @api_view(["GET"])
@@ -69,7 +70,21 @@ class EventsList(APIView):
     #         data = ProductSerializer(instance).data
     #     return Response(data)
 
-    
+@api_view(['POST'])
+def apply_to_event(request, *args, **kwargs):
+    if request.user.is_authenticated:
+        current_user = request.user
+        event_id = request.data['event_id']
+        this_event = Event.objects.get(id=event_id)
+        application_exists = EventApplication.objects.filter(user=current_user, event=this_event)
+        if len(application_exists) > 0:
+            return Response({'message':'Already applied to this event'}, status=status.HTTP_409_CONFLICT)
+
+        new_application = EventApplication(user=current_user, event=this_event)
+        new_application.save()
+        return Response(status=status.HTTP_201_CREATED)
+    else:
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
 class EventCreate(generics.CreateAPIView):
     permission_classes = [HubProfilePermission]
