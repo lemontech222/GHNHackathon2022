@@ -28,7 +28,7 @@ export const HeaderContainer = styled.div`
   padding: 10px 20px;
   //   font-weight: 900;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 `;
 
