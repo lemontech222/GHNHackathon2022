@@ -15,7 +15,12 @@ const Nav = () => {
   }
   
   return (
-    <div style={{width:'100%',backgroundColor:'#fff',borderBottom:'3px solid #555'}}>
+    <div style={{
+                width:'100%',
+                backgroundColor:'#fff',
+                borderBottom:'3px solid #555',
+                marginBottom:'20px'
+              }}>
       <Container>
         <NavBar>
           <div className="app-logo">
