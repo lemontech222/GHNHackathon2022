@@ -4,6 +4,7 @@ import { LoginPage } from './containers/LoginPage';
 import { Dashboard } from './containers/Dashboard';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ProtectedRoute } from './components/ProtectedRoute';
+import { Home } from './containers/Home';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route path="/" element={<Home />} />
       </Routes>
     </div>
   );

@@ -34,6 +34,7 @@ export const SubText = styled.p`
   font-size: ${({ fontSize }) => (fontSize ? fontSize + 'px' : '20px')};
   // line-height: 24px;
   text-align: ${({ align }) => (align ? align : 'left')};
+  margin: 0;
 
   color: ${({ color }) => (color ? color : '#000000')};
 `;

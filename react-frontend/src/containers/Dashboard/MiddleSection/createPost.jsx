@@ -60,10 +60,6 @@ const ModalScroll = styled.div`
   height: 400px;
   overflow-x: hidden;
   overflow-y: auto;
-  //   display: flex;
-  //   flex-direction: column;
-  //   justify-content: space-around;
-  //   align-items: flex-start;
 `;
 
 const FormContainer = styled.form`
@@ -104,7 +100,7 @@ function CreatePostModal(props) {
         </Identifier>
         <ModalScroll>
           <Marginer direction="vertical" margin={20} />
-          <PostText placeholder="What is new at GHN?" onChange={AdjustHeight} />
+          <PostText placeholder="What's new?" onChange={AdjustHeight} />
           <Marginer direction="vertical" margin={20} />
           <UploadPhotos />
         </ModalScroll>
@@ -121,9 +117,6 @@ function CreatePostModal(props) {
           Post
         </Button>
       </Modal.Body>
-      {/* <Modal.Footer>
-        <Button click={props.onHide}>Close</Button>
-      </Modal.Footer> */}
     </Modal>
   );
 }

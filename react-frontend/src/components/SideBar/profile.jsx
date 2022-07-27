@@ -3,6 +3,7 @@ import { BoldLink } from '../../containers/LoginPage/loginForm';
 import { LogoImage } from '../BrandLogo';
 import { SubText } from '../Comon';
 import { Marginer } from '../Marginer';
+import Logo from '../../images/logo/ghnlogo.png';
 
 export const SubContainer = styled.div`
   width: 100%;
@@ -13,7 +14,7 @@ export const SubContainer = styled.div`
   box-shadow: 0px 1px 0px 0px #cac1c1;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: ${({ align }) => (align ? align : 'flex-start')};
 `;
 
 export const HeaderContainer = styled.div`
@@ -28,7 +29,7 @@ export const HeaderContainer = styled.div`
   padding: 10px 20px;
   //   font-weight: 900;
   display: flex;
-  justify-content: space-between;
+  justify-content: ${({ justify }) => (justify ? justify : 'space-between')};
   align-items: center;
 `;
 
@@ -60,16 +61,19 @@ export function Profile(props) {
   const { hubProfile } = props;
   return (
     <SubContainer>
-      <HeaderContainer>
+      <HeaderContainer justify="center">
         <HubLogo>
           <LogoImage size={6}>
-            <img src={hubProfile.hub_profile_pic} alt="hub logo" />
+            {hubProfile && (
+              <img src={hubProfile.hub_profile_pic} alt="hub logo" />
+            )}
+            {!hubProfile && <img src={Logo} alt="ghn logo" />}
           </LogoImage>
         </HubLogo>
       </HeaderContainer>
       <Marginer direction="vertical" margin={60} />
       <SubText align="center" color="#34abde" fontWeight={500}>
-        {hubProfile.hub_name}
+        {hubProfile && hubProfile.hub_name}
       </SubText>
 
       <Section>

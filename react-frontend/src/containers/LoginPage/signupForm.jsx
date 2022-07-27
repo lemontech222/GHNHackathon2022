@@ -109,6 +109,9 @@ export function SignupForm() {
       }).then(
         (response) => {
           console.log(response);
+
+          window.location.href = '/signin';
+          alert('Successfully regitered, please sign in');
         },
         (err) => {
           console.log('Error: ', err);

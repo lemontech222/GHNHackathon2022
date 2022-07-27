@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Events } from './events';
+import { Forum } from './forum';
 
 const SideBarContainer = styled.div`
   width: 20%;
@@ -8,10 +9,12 @@ const SideBarContainer = styled.div`
   align-items: flex-start;
 `;
 
-export function RightSideBar() {
+export function RightSideBar(props) {
+  const { events } = props;
   return (
     <SideBarContainer>
-      <Events />
+      <Events events={events} />
+      <Forum />
     </SideBarContainer>
   );
 }
