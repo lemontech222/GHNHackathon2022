@@ -14,10 +14,33 @@ import { ProfileForm } from './profile_form';
 
 export function Dashboard() {
   const [hubProfile, setHubProfile] = useState({});
-  const [profileExist, setProfileExist] = useState(false);
+  const [events, setEvents] = useState([]);
+
   const token = Cookies.get('jwt_access');
   const decoded = jwt_decode(token);
-  // console.log(decoded);
+
+  const GetEvents = async () => {
+    Axios({
+      method: 'get',
+      url: 'api/events/list/',
+    }).then(
+      (response) => {
+        setEvents(response.data);
+        console.log(response.data);
+      },
+      (err) => {
+        console.log('Error: ', err);
+      }
+    );
+    console.log(events);
+  };
+
+  useEffect(() => {
+    GetEvents();
+  }, []);
+
+  if (token) {
+  }
 
   const fetchHub = async () => {
     !token && (window.location.href = '/signin');
@@ -30,11 +53,8 @@ export function Dashboard() {
     });
 
     if (response) {
-      const profile = response.data;
-      !profile.newly_created && setProfileExist(true);
       setHubProfile(response.data);
       console.log(hubProfile);
-      // console.log(profileExist);
     }
   };
 
@@ -45,14 +65,14 @@ export function Dashboard() {
   return (
     <PageContainer>
       <Navbar username={decoded.username} />
-      {profileExist && (
+      {!hubProfile.newly_created && (
         <InnerPageContainer>
           <SideBar hubProfile={hubProfile} />
-          <MiddleSection hubProfile={hubProfile} />
-          <RightSideBar />
+          <MiddleSection hubProfile={hubProfile} events={events} />
+          <RightSideBar events={events} />
         </InnerPageContainer>
       )}
-      {!profileExist && (
+      {hubProfile.newly_created && (
         <InnerPageContainer>
           <ProfileForm hubProfile={hubProfile} />
         </InnerPageContainer>

@@ -10,11 +10,11 @@ const SideBarContainer = styled.div`
 `;
 
 export function SideBar(props) {
-  const { hubProfile } = props;
+  const { hubProfile, noToken } = props;
   return (
     <SideBarContainer>
       <Profile hubProfile={hubProfile} />
-      <Chat />
+      {!noToken && <Chat />}
     </SideBarContainer>
   );
 }
