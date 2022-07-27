@@ -1,22 +1,26 @@
 import React from 'react'
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faSearch} from '@fortawesome/free-solid-svg-icons'
+
+import {NavBar} from './Nav.style.js';
+import appLogo from '../../images/logo/ghnlogo.png';
 
 const Nav = () => {
   return (
     <Container>
-      <Row>
-        <Col style={{border:'1px solid black'}} xs={6} md={4}>
-          xs=6 md=4
-        </Col>
-        <Col style={{border:'1px solid black'}} xs={6} md={4}>
-          xs=6 md=4
-        </Col>
-        <Col style={{border:'1px solid black'}} xs={6} md={4}>
-          xs=6 md=4
-        </Col>
-      </Row>
+      <NavBar>
+        <div className="app-logo">
+          <img src={appLogo} alt="Ghana Hubs Network Logo" />
+        </div>
+        <form className="search-form">
+          <input type="text" placeholder="Search" />
+          <button type='submit'>
+            <FontAwesomeIcon icon={faSearch} />
+          </button>
+        </form>
+        <h6>Navs</h6>        
+      </NavBar>
     </Container>
   )
 }
