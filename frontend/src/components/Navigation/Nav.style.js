@@ -13,6 +13,7 @@ export const NavBar = styled.nav`
     }
     & .app-logo img{
         height:100%;
+        cursor:pointer;
     }
     & .search-form{
         display:flex;
@@ -26,7 +27,10 @@ export const NavBar = styled.nav`
         border-top-left-radius:5px;
         border-bottom-left-radius:5px;
         font-size:1.4em;
-        padding: 5px;
+        padding: 5px 10px;
+    }
+    & .search-form input:focus{
+        outline:none;
     }
     & .search-form button{
         font-size:1.4em;
@@ -38,9 +42,9 @@ export const NavBar = styled.nav`
         color:#fff;
     }
     & .navLinks{
-        border:1px solid black;
         display:flex;
         justify-content:flex-end;
+        align-items:center;
     }
 `
 
