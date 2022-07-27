@@ -18,7 +18,6 @@ export const NavBar = styled.nav`
         display:flex;
         justify-content:center;
         align-items:center;
-        border:1px solid black;
     }
     & .search-form input{
         width: 90%;
@@ -37,6 +36,11 @@ export const NavBar = styled.nav`
         border:1px solid var(--primary-color);
         background-color:var(--primary-color);
         color:#fff;
+    }
+    & .navLinks{
+        border:1px solid black;
+        display:flex;
+        justify-content:flex-end;
     }
 `
 
