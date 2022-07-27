@@ -9,6 +9,8 @@ import { faCog, faDoorOpen, faUser } from '@fortawesome/free-solid-svg-icons';
 import { SearchBox } from '../SearchBox';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Cookies from 'js-cookie';
+import { Button } from '../Button';
+import { Marginer } from '../Marginer';
 
 const NavbarContainer = styled.nav`
   width: 100%;
@@ -55,14 +57,15 @@ const BottomNav = styled.div`
 `;
 
 const AccessibilityContainer = styled.div`
+  width: 15%;
   height: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
 `;
 
 const SearchBar = styled.div`
-  width: 60%;
+  width: 50%;
   height: 100%;
   display: flex;
   align-items: center;
@@ -92,7 +95,7 @@ const UserImage = styled.div`
 `;
 
 export const AnchorLink = styled(Link)`
-  font-size: 16px;
+  font-size: ${({ linkSize }) => (linkSize ? linkSize + 'px' : '16px')};
   color: ${({ linkColor }) => (linkColor ? linkColor : '#ffffff')};
   cursor: pointer;
   text-decoration: none;
@@ -120,7 +123,7 @@ export const Separator = styled.div`
 
 export function Navbar(props) {
   const { useTransparent, username } = props;
-
+  const token = Cookies.get('jwt_access');
   const isMobile = useMediaQuery({ maxWidth: deviceSize.mobile });
 
   return (
@@ -132,41 +135,65 @@ export function Navbar(props) {
           <SearchBar>
             <SearchBox />
           </SearchBar>
-
-          <AccessibilityContainer>
-            <Link to="/customer/access/cart">
-              <UserImage></UserImage>
-            </Link>
-            {/* <Marginer direction="horizontal" margin={30} /> */}
-            {/* <Link to="/customer/access/signup">
+          {token && (
+            <AccessibilityContainer>
+              <Link to="/customer/access/cart">
+                <UserImage></UserImage>
+              </Link>
+              {/* <Marginer direction="horizontal" margin={30} /> */}
+              {/* <Link to="/customer/access/signup">
               <Button size={20}>Logout</Button>
             </Link>
             <Marginer direction="horizontal" margin={30} />
             <Link to="/customer/access/cart">
               <FontAwesomeIcon icon={faCog} color="#1F3F49" fontSize={35} />
             </Link> */}
-            <Dropdown>
-              <NavDropdown id="dark" title={username} menuVariant="dark" active>
-                <NavDropdown.Item href="/change-password">
-                  <FontAwesomeIcon icon={faUser} fontSize={15} /> Change
-                  Password
-                </NavDropdown.Item>
-                <NavDropdown.Item href="/settings">
-                  <FontAwesomeIcon icon={faCog} fontSize={15} /> Settings
-                </NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item
-                  href="/home"
-                  onClick={() => Cookies.set('jwt_access', '')}
+              <Dropdown>
+                <NavDropdown
+                  id="dark"
+                  title={username}
+                  menuVariant="dark"
+                  active
                 >
-                  <FontAwesomeIcon icon={faDoorOpen} fontSize={15} /> Logout
-                </NavDropdown.Item>
-              </NavDropdown>
-            </Dropdown>
-          </AccessibilityContainer>
+                  <NavDropdown.Item href="/change-password">
+                    <FontAwesomeIcon icon={faUser} fontSize={15} /> Change
+                    Password
+                  </NavDropdown.Item>
+                  <NavDropdown.Item href="/settings">
+                    <FontAwesomeIcon icon={faCog} fontSize={15} /> Settings
+                  </NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item
+                    href="/"
+                    onClick={() => Cookies.set('jwt_access', '')}
+                  >
+                    <FontAwesomeIcon icon={faDoorOpen} fontSize={15} /> Logout
+                  </NavDropdown.Item>
+                </NavDropdown>
+              </Dropdown>
+            </AccessibilityContainer>
+          )}
+          {!token && (
+            <AccessibilityContainer>
+              <AnchorLink to="/signin" linkColor="#000000">
+                Login
+              </AnchorLink>
+              <Marginer direction="horizontal" margin={10} />
+              <Button
+                type="button"
+                width="60%"
+                size={16}
+                height={40}
+                bradius={10}
+                click={() => (window.location.href = '/signup')}
+              >
+                Sign Up
+              </Button>
+            </AccessibilityContainer>
+          )}
         </TopNav>
         <BottomNav>
-          {!isMobile && (
+          {!isMobile && token && (
             <NavContainer>
               <AnchorLink to="/">Dashboard</AnchorLink>
             </NavContainer>

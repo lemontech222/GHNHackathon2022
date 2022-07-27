@@ -1,32 +1,24 @@
 import styled from 'styled-components';
 import { LogoImage } from '../BrandLogo';
 import { HeaderContainer, SubContainer } from '../SideBar/profile';
-import Axios from 'axios';
-import Cookies from 'js-cookie';
-import { useEffect, useState } from 'react';
 import { SubSubTitle, SubText } from '../Comon';
 
-export const Name = styled.h3`
-  font-size: 15px;
-  font-weight: 700;
-  margin: 0;
-  color: #484848;
-`;
-
-export const Message = styled.p`
-  font-size: 13;
-  margin: 0;
-  color: #484848;
-`;
-
-const EventContainer = styled.div`
+export const EventContainer = styled.div`
   width: 100%;
   margin: 0;
-  padding: 10px 10px;
+  padding: 5px 5px;
   display: fllex;
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid rgba(72, 72, 72, 0.2);
+
+  &:hover {
+    cursor: pointer;
+    filter: contrast(0.8);
+    box-shadow: -3px 2px 5px 1px rgba(248, 99, 29, 0.4);
+    -webkit-box-shadow: -3px 2px 5px 1px rgba(248, 99, 29, 0.4);
+    -moz-box-shadow: -3px 2px 5px 1px rgba(248, 99, 29, 0.4);
+  }
 `;
 
 const Hub = styled.div`
@@ -46,34 +38,8 @@ const Event = styled.div`
   justify-content: center;
 `;
 
-export function Events() {
-  const [events, setEvents] = useState([]);
-
-  const GetEvents = async () => {
-    const token = Cookies.get('jwt_access');
-
-    Axios({
-      method: 'get',
-      url: 'api/events/list/',
-
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }).then(
-      (response) => {
-        setEvents(response.data);
-        console.log(response.data);
-      },
-      (err) => {
-        console.log('Error: ', err);
-      }
-    );
-    console.log(events);
-  };
-
-  useEffect(() => {
-    GetEvents();
-  }, []);
+export function Events(props) {
+  const { events } = props;
 
   return (
     <SubContainer>
@@ -82,7 +48,7 @@ export function Events() {
         <div>See All</div>
       </HeaderContainer>
       {events &&
-        events.map((event) => {
+        events.map((event, idx) => {
           return (
             <EventContainer>
               <Hub>
