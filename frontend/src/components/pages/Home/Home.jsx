@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useTokens } from '../../../context/TokensContext';
 import useRequestResource from '../../../hooks/useRequestResource';
+import Forums from '../../Common/Forum/Forums';
 import SideBar from '../../Common/SideBar';
 import { HomePage } from './Home.style';
 
@@ -18,9 +19,11 @@ const Home = () => {
 
   return (
     <HomePage>
-      <SideBar>Left</SideBar>
+      <SideBar></SideBar>
       <div style={{ border: '1px solid black' }}></div>
-      <SideBar>Right</SideBar>
+      <SideBar>
+        <Forums />
+      </SideBar>
     </HomePage>
   );
 };

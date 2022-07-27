@@ -5,4 +5,5 @@ export const HomePage = styled.div`
   min-height: 80vh;
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
+  gap: 10px;
 `;
