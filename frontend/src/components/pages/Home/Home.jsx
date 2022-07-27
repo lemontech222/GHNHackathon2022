@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useTokens } from '../../../context/TokensContext';
 import useRequestResource from '../../../hooks/useRequestResource';
+import Forums from '../../Common/Forum/Forums';
 import SideBar from '../../Common/SideBar';
 import { HomePage } from './Home.style';
 import PostsContainer from '../../Common/PostsContainer/PostsContainer';
@@ -24,8 +25,10 @@ const Home = () => {
         <PostsContainer isEvent={true} />
         {/* <HubsCarousel /> */}
         <PostsContainer isEvent={false} />
-      </div>      
-      <SideBar>Right</SideBar>
+      </div>
+      <SideBar>
+        <Forums />
+      </SideBar>
     </HomePage>
   );
 };
