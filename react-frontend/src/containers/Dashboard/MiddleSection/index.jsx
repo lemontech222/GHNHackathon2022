@@ -23,7 +23,7 @@ export function MiddleSection(props) {
     <MiddleSectionContainer>
       {isAuth && <CreatePost hubProfile={hubProfile} />}
       {isAuth && <Tabs />}
-      {isAuth && <HubCarousel />}
+      {/* {isAuth && <HubCarousel />} */}
 
       <LatestPost />
       <Event events={events} />

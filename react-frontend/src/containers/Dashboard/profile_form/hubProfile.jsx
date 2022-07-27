@@ -8,7 +8,7 @@ import { AdjustHeight } from '../MiddleSection/createPost';
 import Axios from 'axios';
 import Cookies from 'js-cookie';
 
-const HubProfileContainer = styled.div`
+const HubProfileContainer = styled.form`
   width: 70%;
   display: flex;
   flex-direction: column;
@@ -24,6 +24,7 @@ export function HubProfile(props) {
   const [address, setAddress] = useState('');
   const [gps, setGps] = useState('');
   const [reg, setReg] = useState('');
+  const [logo, setLogo] = useState();
   const [error, setError] = useState();
 
   const SaveProfile = async (e) => {
@@ -40,6 +41,7 @@ export function HubProfile(props) {
         physical_address: address,
         gps_address: gps,
         business_registration_number: reg,
+        hub_profile_pic: logo,
       },
       headers: {
         Authorization: `Bearer ${token}`,
@@ -57,7 +59,7 @@ export function HubProfile(props) {
   };
 
   return (
-    <HubProfileContainer>
+    <HubProfileContainer encType="multipart/form-data">
       <Title>Hub Profile</Title>
       <SubText>Complete your hub's profile</SubText>
       <Input placeholder="Hub Name" onChange={(e) => setName(e.target.value)} />
@@ -80,6 +82,11 @@ export function HubProfile(props) {
       <Input
         placeholder="Business Registration"
         onChange={(e) => setReg(e.target.value)}
+      />
+      <Input
+        type="file"
+        placeholder="Business Registration"
+        onChange={(e) => setLogo(e.target.value)}
       />
       <Marginer direction="vertical" margin={10} />
       <Button
