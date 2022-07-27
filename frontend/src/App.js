@@ -6,21 +6,25 @@ import Register from "./components/pages/Register/Register"
 import Hub from "./components/pages/Hub/Hub"
 import Startup from "./components/pages/Startup/Startup"
 
+import Container from 'react-bootstrap/Container';
+
 function App() {
   return (
     <>
       <Nav />
-      <Routes>
-        <Route path="/">
-          <Route path="" element={<Home />} />
-          <Route path="login" element={<Login />} />
-          <Route path="register" element={<Register />} />
-          <Route path="dashboard">
-            <Route path="hub" element={<Hub />} />
-            <Route path="startup" element={<Startup />} />
+      <Container>
+        <Routes>
+          <Route path="/">
+            <Route path="" element={<Home />} />
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
+            <Route path="dashboard">
+              <Route path="hub" element={<Hub />} />
+              <Route path="startup" element={<Startup />} />
+            </Route>
           </Route>
-        </Route>
-      </Routes>
+        </Routes>
+      </Container>
     </>
   );
 }
