@@ -4,6 +4,7 @@ import useRequestResource from '../../../hooks/useRequestResource';
 import Forums from '../../Common/Forum/Forums';
 import SideBar from '../../Common/SideBar';
 import { HomePage } from './Home.style';
+import PostsContainer from '../../Common/PostsContainer/PostsContainer';
 
 const Home = () => {
   const { tokens } = useTokens();
@@ -11,7 +12,7 @@ const Home = () => {
     endpoint: 'users/innovators/count',
     tokens: { tokens },
   });
-  console.log(resourceCount);
+  // console.log(resourceCount);
 
   useEffect(() => {
     getResourceCount();
@@ -19,8 +20,12 @@ const Home = () => {
 
   return (
     <HomePage>
-      <SideBar></SideBar>
-      <div style={{ border: '1px solid black' }}></div>
+      <SideBar>Left</SideBar>
+      <div className="mid-section">
+        <PostsContainer isEvent={true} />
+        {/* <HubsCarousel /> */}
+        <PostsContainer isEvent={false} />
+      </div>
       <SideBar>
         <Forums />
       </SideBar>
