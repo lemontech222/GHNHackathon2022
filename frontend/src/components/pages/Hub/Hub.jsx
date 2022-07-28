@@ -1,5 +1,7 @@
 import React from 'react';
+import Chat from '../../Common/Chat/Chat';
 import EntityProfile from '../../Common/EntityProfile/Profile';
+import EventApp from '../../Common/EventApplications/EventApplications';
 import SideBar from '../../Common/SideBar';
 import { HomePage } from '../Home/Home.style';
 
@@ -8,9 +10,12 @@ const Hub = () => {
     <HomePage>
       <SideBar>
         <EntityProfile />
+        <Chat />
       </SideBar>
       <div></div>
-      <SideBar>Right</SideBar>
+      <SideBar>
+        <EventApp />
+      </SideBar>
     </HomePage>
   );
 };

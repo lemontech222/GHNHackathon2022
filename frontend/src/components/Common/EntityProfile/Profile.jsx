@@ -1,11 +1,14 @@
 import { AnchorLink } from '..';
 import { ProfileWrapper } from './Profile.styles';
+import HubLogo from '../../../images/fabhublogo.png';
 
 const EntityProfile = () => {
   return (
     <ProfileWrapper>
       <div className="hero-section">
-        <div className="profile-photo"></div>
+        <div className="profile-photo">
+          <img src={HubLogo} alt="hub logo" />
+        </div>
       </div>
       <div className="profile-name">
         <h2>Fab Hub Ashanti</h2>
