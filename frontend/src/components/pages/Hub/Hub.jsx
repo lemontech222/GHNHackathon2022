@@ -7,6 +7,7 @@ import EventApp from '../../Common/EventApplications/EventApplications';
 import Forums from '../../Common/Forum/Forums';
 import { Marginer } from '../../Common/Marginer';
 import SideBar from '../../Common/SideBar';
+import EventsListContainer from '../Home/EventsListContainer';
 import { HomePage } from '../Home/Home.style';
 
 const Hub = () => {
@@ -20,6 +21,7 @@ const Hub = () => {
         <CreatePost />
         <Marginer direction="vertical" margin={20} />
         <ItemsCarousel />
+        <EventsListContainer />
       </div>
       <SideBar>
         <EventApp />
