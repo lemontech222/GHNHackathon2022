@@ -1,3 +1,4 @@
+import { AnchorLink } from '../../../Common';
 import { ProfileWrapper } from './Profile.styles';
 
 const Profile = () => {
@@ -22,9 +23,9 @@ const Profile = () => {
           <h3>1674</h3>
         </div>
         <div className="action">
-          <a href="#">
+          <AnchorLink to="">
             <p>Learn more...</p>
-          </a>
+          </AnchorLink>
         </div>
       </div>
     </ProfileWrapper>
