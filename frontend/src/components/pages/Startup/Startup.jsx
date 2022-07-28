@@ -4,6 +4,7 @@ import CreatePost from '../../Common/CreatePost/CreatePost';
 import EntityProfile from '../../Common/EntityProfile/Profile';
 import Forums from '../../Common/Forum/Forums';
 import SideBar from '../../Common/SideBar';
+import EventsListContainer from '../Home/EventsListContainer';
 import { HomePage } from '../Home/Home.style';
 import { useNavigate } from 'react-router-dom'
 import { useTokens } from '../../../context/TokensContext'
@@ -30,6 +31,7 @@ const Startup = () => {
       <div>
         <CreatePost />
         <ItemsCarousel />
+        <EventsListContainer />
       </div>
       <SideBar>
         <Forums />

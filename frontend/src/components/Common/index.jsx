@@ -6,6 +6,7 @@ export const AnchorLink = styled(Link)`
 `;
 
 export const Button = styled.button`
+  width: ${({ width }) => (width ? width : 'none')};
   background: var(--primary-color);
   color: #ffffff;
   outline: none;
