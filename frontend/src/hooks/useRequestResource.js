@@ -9,7 +9,6 @@ const useRequestResource = ({endpoint, tokens=null, label=''}) => {
     });
     const [resource,setResource] = useState(null);
     const [resourceCounts,setResourceCounts] = useState(null);
-    const [error,setError] = useState(null);
 
     const {setTokens} = useTokens();
 
@@ -54,13 +53,14 @@ const useRequestResource = ({endpoint, tokens=null, label=''}) => {
             })
     },[endpoint])
 
+
     return {
         resourceList,
         getResourceList,
         resource,
+        // getClassifiedResource,
         getResourceCounts,
         resourceCounts,
-        error,
         getTokens,
         addUser
     }

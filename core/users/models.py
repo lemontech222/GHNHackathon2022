@@ -34,6 +34,8 @@ class Hub(models.Model):
 # Hub
 class Startup(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+    startup_profile_pic = models.ImageField(default='User.png',upload_to='hub_profile_pics', null=True, blank=True)
+    
     startup_name = models.CharField(max_length=255, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
     contact = models.CharField(max_length=20, null=True, blank=True)

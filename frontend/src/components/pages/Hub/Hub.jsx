@@ -10,7 +10,12 @@ import SideBar from '../../Common/SideBar';
 import EventsListContainer from '../Home/EventsListContainer';
 import { HomePage } from '../Home/Home.style';
 
+import { useHub } from '../../../context/HubContext';
+
 const Hub = () => {
+  const {hub} = useHub()
+  console.log(hub)
+
   return (
     <HomePage>
       <SideBar>
