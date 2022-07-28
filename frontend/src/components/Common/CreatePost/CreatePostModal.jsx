@@ -1,3 +1,4 @@
+import React, {useState} from 'react';
 import { Modal } from 'react-bootstrap';
 import { PostModalWrapper } from './CreatePost.style';
 import { Marginer } from '../Marginer';
@@ -14,6 +15,7 @@ export const AdjustHeight = (e) => {
 
 function CreatePostModal(props) {
   const { user } = useTokens();
+  
   return (
     <Modal
       {...props}
@@ -40,13 +42,11 @@ function CreatePostModal(props) {
             onChange={AdjustHeight}
           />
           <div className="addons">
-            <h3>Add to post</h3>
-            <div className="options">
-              <img src={AddPhoto} alt="add photos" />
-              <img src={AddTag} alt="add tags" />
-              <img src={AddCheckin} alt="add Checkins" />
-              <img src={AddDoc} alt="add Docs" />
-            </div>
+              <h3>Add to post</h3>
+              <div className="options">
+                <img src={AddPhoto} alt="add photos" />
+                <img src={AddDoc} alt="add Docs" />
+              </div>
           </div>
           <Marginer direction="vertical" margin={20} />
           <Button width="100%">Post</Button>

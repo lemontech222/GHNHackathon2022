@@ -3,7 +3,7 @@ import useRequestResource from '../../../hooks/useRequestResource';
 
 const CommunitiesCount = () => {
     const {getResourceCounts, resourceCounts} = useRequestResource({endpoint:'hub_communities/count'})
-    console.log(resourceCounts)
+    
     useEffect(()=>{
         getResourceCounts()
     },[getResourceCounts])

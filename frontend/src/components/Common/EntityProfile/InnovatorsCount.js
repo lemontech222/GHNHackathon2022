@@ -4,7 +4,7 @@ import useRequestResource from '../../../hooks/useRequestResource';
 
 const InnovatorsCount = () => {
     const {getResourceCounts, resourceCounts} = useRequestResource({endpoint:'hub_innovators/count'})
-    console.log(resourceCounts)
+   
     useEffect(()=>{
         getResourceCounts()
     },[getResourceCounts])

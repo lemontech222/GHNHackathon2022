@@ -12,7 +12,6 @@ export function useTokens(){
 export const TokensProvider = ({children})=>{
     const [tokens, setTokens] = useLocalStorage('ghn_tokens',null)
     const [user, setUser] = useState(null)
-    console.log(user)
 
     useEffect(()=>{
         setUser(tokens ? 

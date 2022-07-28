@@ -49,6 +49,15 @@ class EventsList(APIView):
         data = ListEventSerializer(events, many=True).data
         return Response(data)
 
+class EventApplicationsList(APIView):
+    # def get(self, request,format=None):
+    #     if not request.user.is_hub_admin:
+    #         return Response(status=status.HTTP_403_FORBIDDEN)
+    #     hub = Hub.objects.get(users__id=request.user.id)
+    #     serializer = HubSerializer(hub)
+        # return Response(serializer.data)
+        pass
+
 
 class PostsList(APIView):
     def get(self, request, *args, **kwargs):

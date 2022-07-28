@@ -46,7 +46,7 @@ class Post(models.Model):
     hub = models.ForeignKey(Hub, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     description = models.TextField()
-    event_pic = models.ImageField(default='User.png',upload_to='events_pics', null=True, blank=True)
+    event_pic = models.ImageField(default='User.png',upload_to='post_pics', null=True, blank=True)
     date_posted = models.DateTimeField(default=timezone.now)
 
     def __str__(self):

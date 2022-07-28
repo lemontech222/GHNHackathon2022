@@ -1,8 +1,18 @@
 import Logo from '../../../images/fabhublogo.png';
 import { ContainerWrap } from '../PostsContainer/ContainerWrap';
 import { EventAppWrapper } from './EventApplications.style';
+import useRequestResource from '../../../hooks/useRequestResource';
+import {useffect} from 'react';
+import { useTokens } from '../../../context/TokensContext';
 
 const EventApp = () => {
+  const {tokens} = useTokens()
+  const {getResourceList, resourceList} = useRequestResource({endpoint:'events/applications', tokens:tokens})
+  console.log(resourceList)
+  
+  useffect(()=>{
+    getResourceList()
+  }, [getResourceList])
   return (
     <ContainerWrap noPadding>
       <EventAppWrapper>
