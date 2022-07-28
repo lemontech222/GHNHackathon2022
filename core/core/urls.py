@@ -5,7 +5,7 @@ from rest_framework.documentation import include_docs_urls
 from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
-from users.views import MyTokenObtainPairView, EntityCounts
+from users.views import MyTokenObtainPairView, EntityCounts,HubCommunitiesCount,HubInnovatorsCount
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -16,6 +16,8 @@ urlpatterns = [
     path('api/users/', include('users.urls')),
     path('api/events/', include('events.urls')),
     path('api/forums/', include('forum.urls')),
+    path('api/hub_innovators/count/', HubInnovatorsCount.as_view(), name='hub_innovators'),
+    path('api/hub_communities/count/', HubCommunitiesCount.as_view(), name='hub_communities'),
     path('api-auth/', include('rest_framework.urls')),
     path('api/token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),

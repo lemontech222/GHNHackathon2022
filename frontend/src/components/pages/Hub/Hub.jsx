@@ -9,7 +9,12 @@ import { Marginer } from '../../Common/Marginer';
 import SideBar from '../../Common/SideBar';
 import { HomePage } from '../Home/Home.style';
 
+import { useHub } from '../../../context/HubContext';
+
 const Hub = () => {
+  const {hub} = useHub()
+  console.log(hub)
+
   return (
     <HomePage>
       <SideBar>

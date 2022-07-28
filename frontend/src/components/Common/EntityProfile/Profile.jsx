@@ -2,6 +2,8 @@ import { AnchorLink } from '..';
 import { ProfileWrapper } from './Profile.styles';
 import HubLogo from '../../../images/fabhublogo.png';
 import { ContainerWrap } from '../PostsContainer/ContainerWrap';
+import CommunitiesCount from './CommunitiesCount';
+import InnovatorsCount from './InnovatorsCount';
 
 const EntityProfile = () => {
   return (
@@ -18,11 +20,11 @@ const EntityProfile = () => {
         <div className="info-section">
           <div className="info">
             <h3>Communities</h3>
-            <h3>51</h3>
+            <CommunitiesCount />
           </div>
           <div className="info">
             <h3>Innovators/Enterpreneurs</h3>
-            <h3>588</h3>
+            <InnovatorsCount />
           </div>
           <div className="action">
             <AnchorLink to="">

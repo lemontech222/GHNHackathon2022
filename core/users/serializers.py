@@ -8,11 +8,25 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
         token = super().get_token(user)
+        
 
-        # Add custom claims
-        token['username'] = user.username
-        token['is_hub_admin'] = user.is_hub_admin
-        token['is_startup_admin'] = user.is_startup_admin
+        if user.is_hub_admin:
+            hub = Hub.objects.get(users__id=user.id)
+
+            # Add custom claims
+            token['username'] = user.username
+            token['is_hub_admin'] = user.is_hub_admin
+            token['is_startup_admin'] = user.is_startup_admin
+            token['profile_pic'] = user.profile.profile_pic.url
+            token['hub'] = {'hub_name':hub.hub_name,'hub_id':hub.id,'hub_profile_pic':hub.hub_profile_pic.url}
+            # token['hub_id'] = hub.id
+            # token['hub_profile_pic'] = hub.hub_profile_pic.url
+        else:
+            token['username'] = user.username
+            token['is_hub_admin'] = user.is_hub_admin
+            token['is_startup_admin'] = user.is_startup_admin
+            token['profile_pic'] = user.profile.profile_pic.url
+                        
         # ...
 
         return token

@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework import generics
 from rest_framework import viewsets
 from accounts.models import User
+from events.models import EventEnrollment
 from .models import Hub, Profile, Startup
 from .serializers import (
                             MyTokenObtainPairSerializer,
@@ -22,25 +23,13 @@ from rest_framework.permissions import (
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-
-class CurrentUserProfilePermission(BasePermission):
-    message = 'Editing posts is restricted to the author only'
-
-    def has_object_permission(self, request, view, obj):
-        if request.method in SAFE_METHODS:
-            return True
-        return obj == request.user
-
-class HubProfilePermission(BasePermission):
-    message = 'Unauthorized access'
-
-    def has_object_permission(self, request, view, obj):
-        if request.method in SAFE_METHODS:
-            return True
-        return request.user in obj.users.all()
+from .permissions import (CurrentUserProfilePermission, 
+                            HubProfilePermission, 
+                            OnwnershipPermission
+                        )
 
 
-# Customize Token claims
+# Customizeds Token claims
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
@@ -134,6 +123,20 @@ class InnovatorsCount(APIView):
         return Response({'innovators_count':innovators_count}, status=status.HTTP_200_OK)
 
 
+class HubCommunitiesCount(APIView):
+    # permission_classes = [OnwnershipPermission]
+    def get(self, request):
+        events_count = EventEnrollment.objects.all().count()
+        return Response({'communities_count':events_count}, status=status.HTTP_200_OK)
+
+
+class HubInnovatorsCount(APIView):
+    permission_classes = [OnwnershipPermission]
+    def get(self, request):
+        enrollments_count = EventEnrollment.objects.all().count()
+        return Response({'innovators_count':enrollments_count}, status=status.HTTP_200_OK)
+
+
 class EntityCounts(APIView):
     permission_classes = [AllowAny]
     def get(self,request):
@@ -152,6 +155,14 @@ class HubList(generics.ListAPIView):
     queryset = Hub.objects.all()
     serializer_class = HubSerializer
 
+class HubProfile(APIView):
+    def get(self, request,format=None):
+        if not request.user.is_hub_admin:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+        hub = Hub.objects.get(users__id=request.user.id)
+        serializer = HubSerializer(hub)
+        return Response(serializer.data)
+        
 
 class GetUserHubDetail(APIView):
     permission_classes = [HubProfilePermission]
