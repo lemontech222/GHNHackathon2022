@@ -9,6 +9,7 @@ import SideAds from '../../Common/Adverts/SideAds/SideAds';
 import Advert1 from '../../../images/ads/advert1.jpeg';
 import Advert2 from '../../../images/ads/advert2.jpeg';
 import Profile from './Profile/Profile';
+import ItemsCarousel from '../../Common/Carousel/Carousel';
 
 const Home = () => {
   const { tokens } = useTokens();
@@ -32,9 +33,9 @@ const Home = () => {
           <img src={Advert2} alt="ad2" />
         </SideAds>
       </SideBar>
-      <div className="mid-section">
+      <div className="mid-section" style={{ display: 'grid' }}>
         <PostsContainer isEvent={true} />
-        {/* <HubsCarousel /> */}
+        <ItemsCarousel />
         <PostsContainer isEvent={false} />
       </div>
       <SideBar>
