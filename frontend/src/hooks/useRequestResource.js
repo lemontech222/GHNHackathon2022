@@ -1,4 +1,4 @@
-import { useCallback, useState, useContext } from "react";
+import { useCallback, useState} from "react";
 import axios from 'axios';
 import { useTokens } from "../context/TokensContext";
 
@@ -13,7 +13,6 @@ const useRequestResource = ({endpoint, tokens=null, label=''}) => {
 
     const {setTokens} = useTokens();
 
-
     const getTokens = useCallback((values)=>{
         axios.post(`api/${endpoint}/`,values)
             .then((res)=>{
@@ -24,13 +23,14 @@ const useRequestResource = ({endpoint, tokens=null, label=''}) => {
             })
     },[endpoint,setTokens])
 
-    const addUser = useCallback((values, callback)=>{
-        axios.post(`api/${endpoint}/`, values)
+    const addUser = useCallback((values,desgination, callback)=>{
+        console.log(desgination)
+        axios.post(`api/${desgination.value}/`, values)
             .then((res)=>{
                 callback()
             })
             .catch((error)=>console.log(error))
-    },[endpoint])
+    },[])
     
     const getResourceCounts = useCallback(()=>{
         axios.get(`/api/${endpoint}/`)

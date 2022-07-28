@@ -1,5 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
+import jwt_decode from "jwt-decode"
 
 const TokensContext = React.createContext()
 
@@ -10,10 +11,18 @@ export function useTokens(){
 
 export const TokensProvider = ({children})=>{
     const [tokens, setTokens] = useLocalStorage('ghn_tokens',null)
+    const [user, setUser] = useState(null)
+
+    useEffect(()=>{
+        setUser(tokens ? 
+            jwt_decode(tokens.access) :
+            null)
+    },[tokens])
 
     return <TokensContext.Provider value={{
                                             tokens,
-                                            setTokens
+                                            setTokens,
+                                            user
                                         }}>
                 {children}
             </TokensContext.Provider>
