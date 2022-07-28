@@ -3,6 +3,8 @@ import { Button } from '..';
 import { useTokens } from '../../../context/TokensContext';
 import { Marginer } from '../Marginer';
 import { CreateEventForm, PostModalWrapper } from './CreatePost.style';
+import 'react-bootstrap';
+import AddImage from '../../../images/icons/photos 1.png';
 
 function CreateEventModal(props) {
   const { user } = useTokens();
@@ -27,8 +29,37 @@ function CreateEventModal(props) {
             <Marginer direction="horizontal" margin={10} />
             <p>{user?.hub.hub_name}</p>
           </div>
+          <Marginer direction="vertical" margin={20} />
           <CreateEventForm>
-            <input type="text" placeholder="Title" />
+            <input class="form-control" type="text" placeholder="Title" />
+            <textarea
+              class="form-control"
+              type="text"
+              placeholder="Description"
+            />
+            <input
+              class="form-control"
+              type="text"
+              placeholder="Physical Address"
+            />
+            <input class="form-control" type="text" placeholder="GPS Address" />
+            <input
+              class="form-control"
+              type="text"
+              placeholder="Seats Available"
+            />
+            <input
+              class="form-control"
+              type="text"
+              placeholder="Contact Person"
+            />
+            <input class="form-control" type="date" placeholder="Start Date" />
+            <input class="form-control" type="date" placeholder="End Date" />
+            <label for="photo">
+              <img src={AddImage} alt="icon" />
+              <h3>Choose Image...</h3>
+            </label>
+            <input id="photo" type="file" style={{ visibility: 'hidden' }} />
           </CreateEventForm>
           <Marginer direction="vertical" margin={20} />
           <Button width="100%">Post</Button>
