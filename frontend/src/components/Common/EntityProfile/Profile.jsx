@@ -4,18 +4,20 @@ import HubLogo from '../../../images/fabhublogo.png';
 import { ContainerWrap } from '../PostsContainer/ContainerWrap';
 import CommunitiesCount from './CommunitiesCount';
 import InnovatorsCount from './InnovatorsCount';
+import { useTokens } from '../../../context/TokensContext';
 
 const EntityProfile = () => {
+  const {user} = useTokens()
   return (
     <ContainerWrap noPadding>
       <ProfileWrapper>
         <div className="hero-section">
           <div className="profile-photo">
-            <img src={HubLogo} alt="hub logo" />
+            <img src={user?.hub.hub_profile_pic} alt="hub logo" />
           </div>
         </div>
         <div className="profile-name">
-          <h2>Fab Hub Ashanti</h2>
+          <h2>{user?.hub.hub_name}</h2>
         </div>
         <div className="info-section">
           <div className="info">

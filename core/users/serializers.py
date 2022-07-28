@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from accounts.models import User
-from .models import Hub
+from .models import Hub, Startup
 
 # Customize token claims serializer
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -21,6 +21,14 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
             token['hub'] = {'hub_name':hub.hub_name,'hub_id':hub.id,'hub_profile_pic':hub.hub_profile_pic.url}
             # token['hub_id'] = hub.id
             # token['hub_profile_pic'] = hub.hub_profile_pic.url
+        elif user.is_startup_admin: 
+            startup = Startup.objects.get(user=user)
+            token['username'] = user.username
+            token['is_hub_admin'] = user.is_hub_admin
+            token['is_startup_admin'] = user.is_startup_admin
+            token['profile_pic'] = user.profile.profile_pic.url
+            token['startup_profile'] = {'startup_name':startup.startup_name,'startup_id':startup.id,'startup_profile_pic':startup.hub_profile_pic.url}
+            
         else:
             token['username'] = user.username
             token['is_hub_admin'] = user.is_hub_admin

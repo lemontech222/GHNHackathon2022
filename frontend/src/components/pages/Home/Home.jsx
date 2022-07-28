@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React from 'react';
 import { useTokens } from '../../../context/TokensContext';
 import Forums from '../../Common/Forum/Forums';
 import SideBar from '../../Common/SideBar';
@@ -12,9 +12,13 @@ import EventsListContainer from './EventsListContainer';
 import PostsListContainer from './PostsListContainer';
 
 const Home = () => {
+
+  const handleScroll = (e) => {
+    console.log('offsetHeight: ', e.currentTarget.offsetHeight);
+  };
   
   return (
-    <HomePage>
+    <HomePage onScroll={handleScroll}>
       <SideBar>
         <Profile />
         <SideAds>
