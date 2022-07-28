@@ -9,7 +9,6 @@ export const ProfileWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: ${({ align }) => (align ? align : 'flex-start')};
-  margin-bottom: 50px;
 
   & .hero-section {
     width: 100%;

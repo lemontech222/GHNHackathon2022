@@ -4,7 +4,7 @@ export const ChatWrapper = styled.div`
   width: 100%;
   background: #ffffff;
   border-radius: 10px;
-  box-shadow: 0px 1px 0px 0px #cac1c1;
+  // box-shadow: 0px 1px 0px 0px #cac1c1;
   display: flex;
   flex-direction: column;
   align-items: ${({ align }) => (align ? align : 'flex-start')};
