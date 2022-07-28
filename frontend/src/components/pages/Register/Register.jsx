@@ -70,6 +70,20 @@ const Register = () => {
         })
         .catch((error)=>console.log(error))
     }
+    if(startupDesgnation.set){
+      axios.post(`api/users/${startupDesgnation.value}/`,values)
+        .then((res)=>{
+          navigate('/login')
+        })
+        .catch((error)=>console.log(error))
+    }
+    if(innovatorDesgnation.set){
+      axios.post(`api/users/${innovatorDesgnation.value}/`,values)
+        .then((res)=>{
+          navigate('/login')
+        })
+        .catch((error)=>console.log(error))
+    }
   }
 
   useEffect(()=>{
