@@ -7,12 +7,14 @@ import {Link, useNavigate} from 'react-router-dom';
 import {NavBar} from './Nav.style.js';
 import appLogo from '../../images/logo/ghnlogo.png';
 
-const Nav = () => {
+const Nav = ({show}) => {
   const navigate = useNavigate()
 
   const goToHomepage = ()=>{
     navigate('/')
   }
+
+  if(!show) return null
   
   return (
     <div style={{

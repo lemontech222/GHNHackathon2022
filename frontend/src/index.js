@@ -4,15 +4,18 @@ import App from './App';
 import "bootstrap/dist/css/bootstrap.min.css";
 import './index.css';
 import {TokensProvider} from './context/TokensContext'
+import {NavigationsProvider} from './context/NavigationsContext'
 import {BrowserRouter} from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <TokensProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <NavigationsProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </NavigationsProvider>
     </TokensProvider>
   </React.StrictMode>
 );
