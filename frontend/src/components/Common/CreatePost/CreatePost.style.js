@@ -110,3 +110,11 @@ export const PostModalWrapper = styled.div`
     }
   }
 `;
+
+export const CreateEventForm = styled.form`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+`;

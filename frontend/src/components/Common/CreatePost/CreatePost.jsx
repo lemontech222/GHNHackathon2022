@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Button } from '..';
 import { Marginer } from '../Marginer';
 import { ContainerWrap } from '../PostsContainer/ContainerWrap';
+import CreateEventModal from './CreateEventModal';
 import { CreatePostWrapper } from './CreatePost.style';
 import CreatePostModal from './CreatePostModal';
 
@@ -22,7 +23,9 @@ const CreatePost = () => {
       <CreatePostWrapper>
         <div className="top-design"></div>
         <div className="create-posts">
-          <Button onClick={handleShow}>Create Event</Button>
+          <Button id="event" onClick={handleShow}>
+            Create Event
+          </Button>
           <Marginer direction="horizontal" margin={10} />
           <Button id="post" onClick={handleShow}>
             Create Post
@@ -32,6 +35,7 @@ const CreatePost = () => {
         </div>
       </CreatePostWrapper>
       <CreatePostModal show={showPost} onHide={handleClose} />
+      <CreateEventModal show={showEvent} onHide={handleClose} />
     </ContainerWrap>
   );
 };

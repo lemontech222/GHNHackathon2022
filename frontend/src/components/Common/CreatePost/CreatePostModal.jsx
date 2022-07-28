@@ -1,18 +1,19 @@
 import { Modal } from 'react-bootstrap';
 import { PostModalWrapper } from './CreatePost.style';
-import Logo from '../../../images/fabhublogo.png';
 import { Marginer } from '../Marginer';
 import AddPhoto from '../../../images/icons/photos 1.png';
 import AddTag from '../../../images/icons/tag 1.png';
 import AddCheckin from '../../../images/icons/check-in 1.png';
 import AddDoc from '../../../images/icons/doc 1.png';
 import { Button } from '..';
+import { useTokens } from '../../../context/TokensContext';
 
 export const AdjustHeight = (e) => {
   e.target.style.height = e.target.scrollHeight + 'px';
 };
 
 function CreatePostModal(props) {
+  const { user } = useTokens();
   return (
     <Modal
       {...props}
@@ -29,10 +30,10 @@ function CreatePostModal(props) {
         <PostModalWrapper>
           <div className="identifier">
             <div className="logo-image">
-              <img src={Logo} alt="logo" />
+              <img src={user?.hub.hub_profile_pic} alt="logo" />
             </div>
             <Marginer direction="horizontal" margin={10} />
-            <p>Fab Hub Ashanti</p>
+            <p>{user?.hub.hub_name}</p>
           </div>
           <textarea
             placeholder="What are you posting about?"

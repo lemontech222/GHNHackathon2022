@@ -1,13 +1,12 @@
 import { AnchorLink } from '..';
 import { ProfileWrapper } from './Profile.styles';
-import HubLogo from '../../../images/fabhublogo.png';
 import { ContainerWrap } from '../PostsContainer/ContainerWrap';
 import CommunitiesCount from './CommunitiesCount';
 import InnovatorsCount from './InnovatorsCount';
 import { useTokens } from '../../../context/TokensContext';
 
 const EntityProfile = () => {
-  const {user} = useTokens()
+  const { user } = useTokens();
   return (
     <ContainerWrap noPadding>
       <ProfileWrapper>
