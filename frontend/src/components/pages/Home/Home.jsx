@@ -5,6 +5,7 @@ import Forums from '../../Common/Forum/Forums';
 import SideBar from '../../Common/SideBar';
 import { HomePage } from './Home.style';
 import PostsContainer from '../../Common/PostsContainer/PostsContainer';
+import ItemsCarousel from '../../Common/Carousel/Carousel'
 
 const Home = () => {
   const { tokens } = useTokens();
@@ -21,9 +22,9 @@ const Home = () => {
   return (
     <HomePage>
       <SideBar>Left</SideBar>
-      <div className="mid-section">
+      <div className="mid-section" style={{display:'grid'}}>
         <PostsContainer isEvent={true} />
-        {/* <HubsCarousel /> */}
+        <ItemsCarousel />
         <PostsContainer isEvent={false} />
       </div>
       <SideBar>

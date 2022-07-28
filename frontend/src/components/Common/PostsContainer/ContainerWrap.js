@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const ContainerWrap = styled.div`
+    width: 100%;
     display:flex;
     flex-direction:column;
     background-color:#fff;
