@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useTokens } from '../../../context/TokensContext';
 import Forums from '../../Common/Forum/Forums';
 import SideBar from '../../Common/SideBar';
