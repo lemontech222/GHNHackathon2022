@@ -10,9 +10,9 @@ const Dashboard = () => {
         if(!tokens){
             navigate('/login')
         }
-        if(user.is_hub_admin){
+        if(user?.is_hub_admin){
             navigate('hub')
-        }else if(user.is_startup_admin){
+        }else if(user?.is_startup_admin){
             navigate('startup')
         }else {
             navigate('/')
