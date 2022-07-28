@@ -117,4 +117,43 @@ export const CreateEventForm = styled.form`
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
+
+  & h3 {
+    font-size: 30px;
+    font-weight: 400;
+  }
+
+  & input,
+  textarea {
+    box-sizing: border-box;
+    width: ${({ width }) => (width ? width + 'px' : '100%')};
+    // height: 60px;
+    margin: 5px 0;
+    padding: 10px 23px;
+    font-size: 24px;
+    line-height: 29px;
+    resize: vertical;
+    overflow: hidden;
+
+    border: 1px solid #34abde;
+    border-radius: 5px;
+
+    & placeholder {
+      font-style: normal;
+      font-weight: 300;
+      font-size: 18px;
+      line-height: 29px;
+
+      color: #322f2f;
+    }
+
+    & focus {
+      border: 2px solid #34abde;
+    }
+
+    & textarea {
+      resize: vertical;
+      overflow: hidden;
+    }
+  }
 `;

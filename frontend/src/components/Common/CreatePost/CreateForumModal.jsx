@@ -6,7 +6,7 @@ import { CreateEventForm, PostModalWrapper } from './CreatePost.style';
 import 'react-bootstrap';
 import AddImage from '../../../images/icons/photos 1.png';
 
-function CreateEventModal(props) {
+function CreateForumModal(props) {
   const { user } = useTokens();
   return (
     <Modal
@@ -17,7 +17,7 @@ function CreateEventModal(props) {
     >
       <Modal.Header closeButton className="px-4">
         <Modal.Title id="contained-modal-title-vcenter" className="ms-auto">
-          Create An Event
+          Open A Forum
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -38,55 +38,13 @@ function CreateEventModal(props) {
               type="text"
               placeholder="Title"
             />
-            <textarea
-              id="description"
-              name="description"
-              class="form-control"
-              type="text"
-              placeholder="Description"
-            />
-            <input
-              id="location"
-              name="location"
-              class="form-control"
-              type="text"
-              placeholder="Physical Address"
-            />
-            <input
-              id="gps_address"
-              name="gps_address"
-              class="form-control"
-              type="text"
-              placeholder="GPS Address"
-            />
-            <input
-              id="number_of_seats"
-              name="number_of_seats"
-              class="form-control"
-              type="text"
-              placeholder="Seats Available"
-            />
-            <input
-              id="contact_person"
-              name="contact_person"
-              class="form-control"
-              type="text"
-              placeholder="Contact Person"
-            />
-            <input
-              id="start_date"
-              name="start_date"
-              class="form-control"
-              type="date"
-              placeholder="Start Date"
-            />
 
-            <input
-              id="end_date"
-              name="end_date"
+            <textarea
+              id="content"
+              name="content"
               class="form-control"
-              type="date"
-              placeholder="End Date"
+              type="text"
+              placeholder="Content"
             />
 
             <label for="photo">
@@ -94,8 +52,8 @@ function CreateEventModal(props) {
               <h3>Choose Image...</h3>
             </label>
             <input
-              id="event_pic"
-              name="event_pic"
+              id="photo"
+              name="photo"
               type="file"
               style={{ visibility: 'hidden' }}
             />
@@ -108,4 +66,4 @@ function CreateEventModal(props) {
   );
 }
 
-export default CreateEventModal;
+export default CreateForumModal;
