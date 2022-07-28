@@ -1,9 +1,26 @@
-import React from 'react'
+import React from 'react';
+import ItemsCarousel from '../../Common/Carousel/Carousel';
+import CreatePost from '../../Common/CreatePost/CreatePost';
+import EntityProfile from '../../Common/EntityProfile/Profile';
+import Forums from '../../Common/Forum/Forums';
+import SideBar from '../../Common/SideBar';
+import { HomePage } from '../Home/Home.style';
 
 const Startup = () => {
   return (
-    <h1>Startup</h1>
-  )
-}
+    <HomePage>
+      <SideBar>
+        <EntityProfile />
+      </SideBar>
+      <div>
+        <CreatePost />
+        <ItemsCarousel />
+      </div>
+      <SideBar>
+        <Forums />
+      </SideBar>
+    </HomePage>
+  );
+};
 
-export default Startup
+export default Startup;
