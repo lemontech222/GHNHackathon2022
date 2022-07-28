@@ -8,5 +8,7 @@ export const SideAdsWrapper = styled.div`
   img {
     width: 100%;
     height: auto;
+    margin-bottom: 40px;
+    border-radius: 5px;
   }
 `;
