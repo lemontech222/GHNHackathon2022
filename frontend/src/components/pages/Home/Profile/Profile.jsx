@@ -1,7 +1,19 @@
+import { useEffect} from 'react';
 import { AnchorLink } from '../../../Common';
 import { ProfileWrapper } from './Profile.styles';
+import { numberFormatter } from '../../../../utils';
+import useRequestResource from '../../../../hooks/useRequestResource';
 
 const Profile = () => {
+  const { getResourceCounts, resourceCounts } = useRequestResource({
+    endpoint: 'counts'
+  });
+
+  useEffect(() => {
+    getResourceCounts();
+  }, [getResourceCounts]);
+
+  
   return (
     <ProfileWrapper>
       <div className="hero-section">
@@ -16,11 +28,11 @@ const Profile = () => {
       <div className="info-section">
         <div className="info">
           <h3>Hubs</h3>
-          <h3>51</h3>
+          <h3>{numberFormatter.format(resourceCounts?.hubs_count ? resourceCounts.hubs_count : 0)}</h3>
         </div>
         <div className="info">
           <h3>Innovators/Enterpreneurs</h3>
-          <h3>1674</h3>
+          <h3>{numberFormatter.format(resourceCounts?.innovators_count ? resourceCounts.innovators_count : 0)}</h3>
         </div>
         <div className="action">
           <AnchorLink to="">

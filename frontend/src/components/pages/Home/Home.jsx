@@ -1,28 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useTokens } from '../../../context/TokensContext';
-import useRequestResource from '../../../hooks/useRequestResource';
 import Forums from '../../Common/Forum/Forums';
 import SideBar from '../../Common/SideBar';
 import { HomePage } from './Home.style';
-import PostsContainer from '../../Common/PostsContainer/PostsContainer';
 import SideAds from '../../Common/Adverts/SideAds/SideAds';
 import Advert1 from '../../../images/ads/advert1.jpeg';
 import Advert2 from '../../../images/ads/advert2.jpeg';
 import Profile from './Profile/Profile';
 import ItemsCarousel from '../../Common/Carousel/Carousel';
+import EventsListContainer from './EventsListContainer';
+import PostsListContainer from './PostsListContainer';
 
 const Home = () => {
-  const { tokens } = useTokens();
-  const { getResourceCount, resourceCount } = useRequestResource({
-    endpoint: 'users/innovators/count',
-    tokens: { tokens },
-  });
-  // console.log(resourceCount);
-
-  useEffect(() => {
-    getResourceCount();
-  }, [getResourceCount]);
-
+  
   return (
     <HomePage>
       <SideBar>
@@ -34,9 +24,9 @@ const Home = () => {
         </SideAds>
       </SideBar>
       <div className="mid-section" style={{ display: 'grid' }}>
-        <PostsContainer isEvent={true} />
+        <EventsListContainer />
         <ItemsCarousel />
-        <PostsContainer isEvent={false} />
+        <PostsListContainer />
       </div>
       <SideBar>
         <Forums />

@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 const TokensContext = React.createContext()
 
@@ -8,7 +9,7 @@ export function useTokens(){
 
 
 export const TokensProvider = ({children})=>{
-    const [tokens, setTokens] = useState(null)
+    const [tokens, setTokens] = useLocalStorage('ghn_tokens',null)
 
     return <TokensContext.Provider value={{
                                             tokens,

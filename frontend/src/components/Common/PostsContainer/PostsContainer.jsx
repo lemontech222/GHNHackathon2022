@@ -2,34 +2,35 @@ import React from 'react'
 import { EventContainer } from './EventsContainer.style'
 import {ContainerWrap} from './ContainerWrap'
 import {Link} from 'react-router-dom'
+import moment from 'moment'
 
-import appLogo from '../../../images/logo/ghnlogo.png';
-import flyer from '../../../images/nuru.jpg';
 
-const PostsContainer = ({isEvent}) => {
-    console.log(isEvent)
+const PostsContainer = ({event, isEvent}) => {
   return (
     <ContainerWrap>
         <EventContainer>
             <Link to="/" className="hub-link">
                 <div className="hub-name-logo">
                     <div className="hub-logo">
-                        <img src={appLogo} alt="event owner" />
+                        <img src={event?.hub.hub_profile_pic} alt="event owner" />
                     </div>
                     <div className="hub-name">
-                        <h6>Ghana Hubs Network</h6>
-                        <small>5 mins ago</small>
+                        <h6>{event?.hub.hub_name}</h6>
+                        <small>Posted {moment(event?.date_posted).startOf('ss').fromNow()}</small>
                     </div>
                 </div>
             </Link>
-            <h5 className="event-title">Women in Technology</h5>
-            <p>Lorem ipsumLorem ipsumLorem ipsumLorem 
-            Lorem ipsumLorem ipsumLorem ipsumLorem ipsum
-            Lorem ipsumLorem ipsumLorem ipsumLorem ipsum
-            Lorem ipsumLorem ipsumipsumLorem ipsum</p>
-            {isEvent && <button className="apply-btn">Apply</button>}
+            <h5 className="event-title">{event?.title}</h5>
+            <p>{event?.description}</p>
+            {isEvent && <>
+                <h6>Venue: {event?.location}</h6>
+                <h6>Start date: {new Date(Date(event?.start_date.isoformat)).toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"})}</h6>
+                <h6>End date: {new Date(Date(event?.end_date.isoformat)).toLocaleDateString('en-us', { weekday:"long", year:"numeric", month:"short", day:"numeric"})}</h6>
+                <h6>Contact number: {event?.contact_person}</h6>
+                <button className="apply-btn" style={{display:'inline-block',margin:'5px 0px'}}>Apply</button>
+            </>}
             <div className="event-flyer">
-                <img src={flyer} alt="women in tech" />
+                <img src={event?.event_pic} alt="women in tech" />
             </div>
         </EventContainer>
     </ContainerWrap>

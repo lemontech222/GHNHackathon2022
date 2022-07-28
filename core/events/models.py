@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from users.models import Hub
 from accounts.models import User
 
@@ -15,6 +16,7 @@ class Event(models.Model):
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
     recurring = models.BooleanField(default=False)
+    date_posted = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return 'event'
@@ -39,4 +41,14 @@ class EventEnrollment(models.Model):
     def __str__(self):
         return f'{self.application.user.username} in {self.application.event.title}'
 
+
+class Post(models.Model):
+    hub = models.ForeignKey(Hub, on_delete=models.CASCADE)
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    event_pic = models.ImageField(default='User.png',upload_to='events_pics', null=True, blank=True)
+    date_posted = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f'post {self.id}'
 

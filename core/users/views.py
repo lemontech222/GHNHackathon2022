@@ -134,6 +134,13 @@ class InnovatorsCount(APIView):
         return Response({'innovators_count':innovators_count}, status=status.HTTP_200_OK)
 
 
+class EntityCounts(APIView):
+    permission_classes = [AllowAny]
+    def get(self,request):
+        innovators_count = Startup.objects.all().count()
+        hubs_count = Hub.objects.all().count()
+        return Response({'innovators_count':innovators_count,'hubs_count':hubs_count}, status=status.HTTP_200_OK)
+
 class UserProfile(generics.RetrieveUpdateAPIView, CurrentUserProfilePermission):
     permission_classes = [CurrentUserProfilePermission]
     queryset = User.objects.all()

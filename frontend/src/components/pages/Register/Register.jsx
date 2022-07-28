@@ -1,19 +1,49 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavbar } from '../../../context/NavigationsContext'
 import { ContainerWrap } from '../../Common/PostsContainer/ContainerWrap';
+import {DesgnationButtons} from './Register.style';
 import { AuthContainer } from '../Login/Login.style';
 import {Link,useNavigate} from 'react-router-dom'
+import useRequestResource from '../../../hooks/useRequestResource';
 
 import appLogo from '../../../images/logo/ghnlogo.png';
 
 const Register = () => {
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password1, setPassword1] = useState('')
+  const [password2, setPassword2] = useState('')
+
+  const [hubDesgnation, setHubDesgnation] = useState({set:false,value:'hub'})
+  const [startupDesgnation, setStartupDesgnation] = useState({set:true,value:'hub'})
+  const [innovatorDesgnation, setInnovatorDesgnation] = useState({set:false,value:'hub'})
+
+  const [designation, setDesignation] = useState('')
+
   const {show,setShow} = useNavbar();
+  // const {addUser} = useRequestResource({endpoint:''});
   
   const navigate=useNavigate()
 
   const goToHomepage = ()=>{
     navigate('/')
   }
+
+  // const submitRegister = (e)=>{
+  //   e.preventDefault();
+  //   if(password1 !== password2){
+  //     console.log('passwords do not match!')
+  //     return
+  //   }
+  //   const values = {
+  //     firstName,lastName,email,password1,password2
+  //   }
+  //   addUser(values,designation, ()=>{
+  //     console.log('registeration successful')
+  //     navigate('/login')
+  //   })
+  // }
 
   useEffect(()=>{
     if(show){
@@ -41,7 +71,15 @@ const Register = () => {
       </div>
       <AuthContainer>
         <ContainerWrap>
-          <h1>Register</h1>
+          <div className="auth-heading">
+            <h1>Register</h1>
+            <div className="desgnation-btns">
+              <DesgnationButtons designation={hubDesgnation}>Hub</DesgnationButtons>
+              <DesgnationButtons designation={startupDesgnation}>Startup</DesgnationButtons>
+              <DesgnationButtons designation={innovatorDesgnation}>Innovator</DesgnationButtons>
+            </div>            
+          </div>
+          
           <h6>Stay up to date on the GHNetwork platform</h6>
           <form>
             <div className="names-field" style={{
@@ -51,7 +89,7 @@ const Register = () => {
                                                   marginBottom:'30px'
                                                 }}
             >
-              <input type="text" placeholder="First name" />
+              <input type="text" placeholder="First name" value={firstName} onChange={(e)=>setFirstName(e.target.value)} />
               <input type="text" placeholder="Last name" />
             </div>
             <div className="email-field">

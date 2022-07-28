@@ -6,11 +6,18 @@ import {Link, useNavigate} from 'react-router-dom';
 
 import {NavBar} from './Nav.style.js';
 import appLogo from '../../images/logo/ghnlogo.png';
+import { useTokens } from '../../context/TokensContext.js';
 
 const Nav = ({show}) => {
   const navigate = useNavigate()
+  const {tokens,setTokens} = useTokens()
 
   const goToHomepage = ()=>{
+    navigate('/')
+  }
+
+  const logOut = ()=>{
+    setTokens(null)
     navigate('/')
   }
 
@@ -35,22 +42,42 @@ const Nav = ({show}) => {
             </button>
           </form>
           <div className="navLinks">
-            <Link to="/login" style={{
-              textDecoration:'none',
-              color:'#000',
-              fontWeight:'bolder',
-              display:'inline-block',
-              marginRight:'5px',
-            }}>Login</Link>
-            <Link to="/register" style={{
-              textDecoration:'none',
-              color:'#fff',
-              fontWeight:'bolder',
-              backgroundColor:'#34ABDE',
-              padding:'5px 8px',
-              marginLeft:'5px',
-              borderRadius:'5px'
-            }}>Register</Link>
+            {!tokens && <>
+              <Link to="/login" style={{
+                textDecoration:'none',
+                color:'#000',
+                fontWeight:'bolder',
+                display:'inline-block',
+                marginRight:'5px',
+              }}>Login</Link>
+              <Link to="/register" style={{
+                textDecoration:'none',
+                color:'#fff',
+                fontWeight:'bolder',
+                backgroundColor:'#34ABDE',
+                padding:'5px 8px',
+                marginLeft:'5px',
+                borderRadius:'5px'
+              }}>Register</Link>
+            </>}
+            {tokens && <>
+              <Link onClick={logOut} to="" style={{
+                textDecoration:'none',
+                color:'#000',
+                fontWeight:'bolder',
+                display:'inline-block',
+                marginRight:'5px',
+              }}>Logout</Link>
+              <Link to="/dashboard" style={{
+                textDecoration:'none',
+                color:'#fff',
+                fontWeight:'bolder',
+                backgroundColor:'#34ABDE',
+                padding:'5px 8px',
+                marginLeft:'5px',
+                borderRadius:'5px'
+              }}>Dashboard</Link>
+            </>}        
           </div>      
         </NavBar>
       </Container>

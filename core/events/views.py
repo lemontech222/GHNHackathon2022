@@ -8,8 +8,8 @@ from rest_framework.permissions import (
                                     )
 
 from users.models import Hub
-from .models import Event, EventApplication
-from .serializers import EventSerializer, ListEventSerializer
+from .models import Event, EventApplication, Post
+from .serializers import EventSerializer, ListEventSerializer,ListPostSerializer
 # from users.serializers import HubSerializer
 
 from django.forms.models import model_to_dict
@@ -43,12 +43,17 @@ class EventsCount(APIView):
         events_count  = Event.objects.filter(hub__user = request.user).count()
         return Response({'events_count':events_count},status=status.HTTP_200_OK)
 
-
-
 class EventsList(APIView):
     def get(self, request, *args, **kwargs):
         events = Event.objects.prefetch_related('hub').all()
         data = ListEventSerializer(events, many=True).data
+        return Response(data)
+
+
+class PostsList(APIView):
+    def get(self, request, *args, **kwargs):
+        events = Post.objects.prefetch_related('hub').all()
+        data = ListPostSerializer(events, many=True).data
         return Response(data)
 
 # @api_view(["GET"])

@@ -1,18 +1,34 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavbar } from '../../../context/NavigationsContext'
 import { ContainerWrap } from '../../Common/PostsContainer/ContainerWrap';
 import { AuthContainer } from './Login.style';
 import {Link,useNavigate} from 'react-router-dom'
+import { useTokens } from '../../../context/TokensContext';
+import useRequestResource from '../../../hooks/useRequestResource';
 
 import appLogo from '../../../images/logo/ghnlogo.png';
 
 const Login = () => {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const {getTokens} = useRequestResource({endpoint:'token'})
+
   const {show, setShow} = useNavbar();
+  const {tokens, setTokens} = useTokens()
 
   const navigate=useNavigate()
 
   const goToHomepage = ()=>{
     navigate('/')
+  }
+
+  const submitLogin = (e)=>{
+    e.preventDefault();
+    const values = {
+      email, password
+    }
+    getTokens(values)
   }
 
   useEffect(()=>{
@@ -26,6 +42,12 @@ const Login = () => {
       setShow(true)
     }
   }, [setShow])
+
+  useEffect(()=>{
+    if(tokens){
+      navigate("/dashboard")
+    }
+  },[tokens,navigate])
 
   return (
     <div style={{position:'relative',border:'1px solid #eee',width:'100%'}}>
@@ -42,12 +64,12 @@ const Login = () => {
         <ContainerWrap>
           <h1>Login</h1>
           <h6>Stay up to date on the GHNetwork platform</h6>
-          <form>
+          <form onSubmit={submitLogin}>
             <div className="email-field">
-              <input type="email" placeholder="E-mail" />
+              <input value={email} onChange={(e)=>setEmail(e.target.value)} type="email" placeholder="E-mail" />
             </div>
             <div className="password-field">
-              <input type="password" placeholder="Password" />
+              <input value={password} onChange={(e)=>setPassword(e.target.value)} type="password" placeholder="Password" />
             </div>
             <aside>
               <Link to="/">Forgot password</Link>

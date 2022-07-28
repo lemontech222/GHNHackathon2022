@@ -8,6 +8,12 @@ export const AuthContainer = styled.div`
     max-width: 600px;
     margin: 10% auto 0% auto;
 
+    & .auth-heading{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        margin-bottom:15px;
+    }
     & h6{
         margin-bottom:20px;        
         font-size:1.4em;

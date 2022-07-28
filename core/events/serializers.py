@@ -16,6 +16,13 @@ class ListEventSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Event
-        fields = ('hub','title','description','location','number_of_seats','gps_address','contact_person','event_pic','start_date','end_date','recurring')
+        fields = ('id','hub','title','description','location','number_of_seats','gps_address','contact_person','event_pic','start_date','end_date','recurring','date_posted')
 
+
+class ListPostSerializer(serializers.ModelSerializer):
+    hub = HubSerializer()
+
+    class Meta:
+        model = Event
+        fields = ('id','hub','title','description','event_pic','date_posted')
 
