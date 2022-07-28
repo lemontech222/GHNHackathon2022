@@ -40,7 +40,7 @@ export const ForumsWrapper = styled.div`
 
   & .forum-wrapper {
     width: 100%;
-    padding: 0 15px;
+    padding: 15px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
